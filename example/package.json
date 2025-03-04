@@ -1,0 +1,41 @@
+{
+  "name": "pushengage-react-native-example",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "build:android": "react-native build-android --extra-params \"--no-daemon --console=plain -PreactNativeArchitectures=arm64-v8a\"",
+    "build:ios": "react-native build-ios --scheme PushengageReactNativeExample --mode Debug --extra-params \"-sdk iphonesimulator CC=clang CPLUSPLUS=clang++ LD=clang LDPLUSPLUS=clang++ GCC_OPTIMIZATION_LEVEL=0 GCC_PRECOMPILE_PREFIX_HEADER=YES ASSETCATALOG_COMPILER_OPTIMIZATION=time DEBUG_INFORMATION_FORMAT=dwarf COMPILER_INDEX_STORE_ENABLE=NO\"",
+    "pod": "RCT_NEW_ARCH_ENABLED=0 npx pod-install"
+  },
+  "dependencies": {
+    "@pushengage/pushengage-react-native": "workspace:^",
+    "@react-native-community/datetimepicker": "^8.2.0",
+    "@react-native-picker/picker": "2.4.10",
+    "@react-navigation/native": "^6.1.9",
+    "@react-navigation/native-stack": "^6.9.17",
+    "react": "18.3.1",
+    "react-native": "0.76.5",
+    "react-native-dropdown-picker": "^5.4.6",
+    "react-native-modal": "^13.0.1",
+    "react-native-safe-area-context": "^5.0.0",
+    "react-native-screens": "^3.29.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/runtime": "^7.25.0",
+    "@react-native-community/cli": "15.0.1",
+    "@react-native-community/cli-platform-android": "15.0.1",
+    "@react-native-community/cli-platform-ios": "15.0.1",
+    "@react-native/babel-preset": "0.76.5",
+    "@react-native/metro-config": "0.76.5",
+    "@react-native/typescript-config": "0.76.5",
+    "react-native-builder-bob": "^0.32.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
