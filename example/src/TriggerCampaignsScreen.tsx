@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
+import PushEngage from '@pushengage/pushengage-react-native';
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useState } from 'react';
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
   ActivityIndicator,
   Alert,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import PushEngage from '@pushengage/pushengage-react-native';
+
+type RootStackParamList = {
+  PushEngage: undefined;
+  SendGoal: undefined;
+  TriggerCampaigns: undefined;
+  TriggerCampaignEntry: undefined;
+  AlertEntry: undefined;
+};
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const TriggerCampaignsScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
   const [isEnableLoading, setIsEnableLoading] = useState(false);
   const [isDisableLoading, setIsDisableLoading] = useState(false);
 
@@ -81,7 +92,7 @@ const TriggerCampaignsScreen = () => {
         onPress={handleEnableAutomatedNotification}
       >
         {isEnableLoading ? (
-          <ActivityIndicator color="#ffffff" size="small" />
+          <ActivityIndicator color='#ffffff' size='small' />
         ) : (
           <Text style={styles.buttonText}>Enable Automated Notification</Text>
         )}
@@ -95,7 +106,7 @@ const TriggerCampaignsScreen = () => {
         onPress={handleDisableAutomatedNotification}
       >
         {isDisableLoading ? (
-          <ActivityIndicator color="#ffffff" size="small" />
+          <ActivityIndicator color='#ffffff' size='small' />
         ) : (
           <Text style={styles.buttonText}>Disable Automated Notification</Text>
         )}
@@ -127,4 +138,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TriggerCampaignsScreen; 
+export default TriggerCampaignsScreen;

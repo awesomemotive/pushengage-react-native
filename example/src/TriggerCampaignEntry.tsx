@@ -1,14 +1,14 @@
-import React, { useState, useRef } from 'react';
+import PushEngage from '@pushengage/pushengage-react-native';
+import { useState } from 'react';
 import {
-  View,
+  Alert,
+  ScrollView,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  ScrollView,
-  StyleSheet,
-  Alert,
+  View,
 } from 'react-native';
-import PushEngage from '@pushengage/pushengage-react-native';
 
 interface DataItem {
   key: string;
@@ -26,7 +26,10 @@ const TriggerCampaignEntry = () => {
 
   const addData = () => {
     if (keyInput.trim() && valueInput.trim()) {
-      setDataList([...dataList, { key: keyInput.trim(), value: valueInput.trim() }]);
+      setDataList([
+        ...dataList,
+        { key: keyInput.trim(), value: valueInput.trim() },
+      ]);
       setKeyInput('');
       setValueInput('');
     }
@@ -37,10 +40,13 @@ const TriggerCampaignEntry = () => {
   };
 
   const combineMaps = () => {
-    return dataList.reduce((acc, item) => {
-      acc[item.key] = item.value;
-      return acc;
-    }, {} as { [key: string]: string });
+    return dataList.reduce(
+      (acc, item) => {
+        acc[item.key] = item.value;
+        return acc;
+      },
+      {} as { [key: string]: string }
+    );
   };
 
   const addTriggerCampaign = async () => {
@@ -48,15 +54,20 @@ const TriggerCampaignEntry = () => {
       const triggerCampaign = {
         campaignName,
         eventName,
-        referenceId: referenceId || undefined,
-        profileId: profileId || undefined,
-        data: combineMaps(),
+        ...(referenceId && { referenceId }),
+        ...(profileId && { profileId }),
+        ...combineMaps(),
       };
 
       const response = await PushEngage.sendTriggerEvent(triggerCampaign);
       Alert.alert('Success', response || 'Trigger campaign added successfully');
     } catch (error) {
-      Alert.alert('Error', error instanceof Error ? error.message : 'Failed to add trigger campaign');
+      Alert.alert(
+        'Error',
+        error instanceof Error
+          ? error.message
+          : 'Failed to add trigger campaign'
+      );
     }
   };
 
@@ -70,7 +81,7 @@ const TriggerCampaignEntry = () => {
       value={value}
       onChangeText={onChangeText}
       placeholder={placeholder}
-      placeholderTextColor="#999"
+      placeholderTextColor='#999'
     />
   );
 
@@ -78,33 +89,33 @@ const TriggerCampaignEntry = () => {
     <ScrollView style={styles.container}>
       {renderTextField(campaignName, setCampaignName, 'Enter campaign name')}
       <View style={styles.spacing} />
-      
+
       {renderTextField(eventName, setEventName, 'Enter event name')}
       <View style={styles.spacing} />
-      
+
       {renderTextField(profileId, setProfileId, 'Enter profile id')}
       <View style={styles.spacing} />
-      
+
       {renderTextField(referenceId, setReferenceId, 'Enter reference id')}
       <View style={styles.spacing} />
 
       <Text style={styles.sectionTitle}>Enter Data</Text>
-      
+
       <View style={styles.dataEntryRow}>
         <TextInput
           style={[styles.input, styles.flex1]}
           value={keyInput}
           onChangeText={setKeyInput}
-          placeholder="Key"
-          placeholderTextColor="#999"
+          placeholder='Key'
+          placeholderTextColor='#999'
         />
         <View style={styles.smallSpacing} />
         <TextInput
           style={[styles.input, styles.flex1]}
           value={valueInput}
           onChangeText={setValueInput}
-          placeholder="Value"
-          placeholderTextColor="#999"
+          placeholder='Value'
+          placeholderTextColor='#999'
         />
         <View style={styles.smallSpacing} />
         <TouchableOpacity style={styles.addButton} onPress={addData}>
@@ -216,4 +227,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TriggerCampaignEntry; 
+export default TriggerCampaignEntry;

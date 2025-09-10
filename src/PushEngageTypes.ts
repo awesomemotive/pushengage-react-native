@@ -1,5 +1,8 @@
 export interface Mappable {
-  toMap(): Record<string, any>;
+  toMap(): Record<
+    string,
+    string | number | boolean | Record<string, string> | undefined
+  >;
 }
 
 export class TriggerCampaign implements Mappable {
@@ -29,7 +32,10 @@ export class TriggerCampaign implements Mappable {
     this.data = data;
   }
 
-  toMap(): Record<string, any> {
+  toMap(): Record<
+    string,
+    string | number | boolean | Record<string, string> | undefined
+  > {
     return {
       campaignName: this.campaignName,
       eventName: this.eventName,
@@ -43,4 +49,17 @@ export class TriggerCampaign implements Mappable {
 export enum TriggerStatusType {
   Enabled = 'enabled',
   Disabled = 'disabled',
+}
+
+/**
+ * Error class for PushEngage permission-related errors.
+ */
+export class PushEngagePermissionError extends Error {
+  constructor(
+    message: string,
+    public code?: string
+  ) {
+    super(message);
+    this.name = 'PushEngagePermissionError';
+  }
 }

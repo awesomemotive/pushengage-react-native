@@ -1,12 +1,30 @@
 pre-commit:
   parallel: true
   commands:
+    format:
+      glob: "*.{js,ts,jsx,tsx,json,md,yml,yaml}"
+      run: npx prettier --write {staged_files}
+      stage_fixed: true
     lint:
       glob: "*.{js,ts,jsx,tsx}"
-      run: npx eslint {staged_files}
+      run: npx eslint --fix {staged_files}
+      stage_fixed: true
     types:
-      glob: "*.{js,ts, jsx, tsx}"
-      run: npx tsc
+      glob: "*.{js,ts,jsx,tsx}"
+      run: npx tsc --noEmit
+
+pre-push:
+  parallel: true
+  commands:
+    test:
+      run: yarn test --passWithNoTests
+    lint-check:
+      run: yarn lint
+    format-check:
+      run: yarn format:check
+    typecheck:
+      run: yarn typecheck
+
 commit-msg:
   parallel: true
   commands:

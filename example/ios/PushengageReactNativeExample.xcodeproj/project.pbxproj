@@ -20,12 +20,12 @@
 		1D6A2F4C2D1935120025393B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D6A2F4A2D1935120025393B /* MainInterface.storyboard */; };
 		1D6A2F502D1935120025393B /* NotificationContentExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1D6A2F422D1935120025393B /* NotificationContentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1D6A2F552D1935CA0025393B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6A2F542D1935CA0025393B /* ContentView.swift */; };
-		54EEFDA821EC12370DAD9982 /* libPods-PushengageReactNativeExample-PushengageReactNativeExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F20DD22A28DE315355307F88 /* libPods-PushengageReactNativeExample-PushengageReactNativeExampleTests.a */; };
-		6BEB32550DB294960FFD88FB /* libPods-PushengageReactNativeExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8522731CA833EE396467A153 /* libPods-PushengageReactNativeExample.a */; };
-		6E69E421DD863ECC514F8AE4 /* libPods-NotificationContentExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFD8D09D13955E717306A91 /* libPods-NotificationContentExtension.a */; };
+		36F965DE3D5B0A2A5679875A /* libPods-NotificationContentExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1356E19A79252EE29DF3291D /* libPods-NotificationContentExtension.a */; };
+		5768EF13C8B573DAEFAB1C7E /* libPods-PushengageReactNativeExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C15F5FBAB6FC41ACA92894 /* libPods-PushengageReactNativeExample.a */; };
+		60BA2868CA6E9B789177B094 /* libPods-NotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D48180CAC7F8BDD87663DA1 /* libPods-NotificationServiceExtension.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		AE3962F915692CBC85AD7BC8 /* libPods-PushengageReactNativeExample-PushengageReactNativeExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4CF33F1D6D3D40A2A03A58F /* libPods-PushengageReactNativeExample-PushengageReactNativeExampleTests.a */; };
 		B5732F9BE2FAB65D3BEF4DD7 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
-		C3FB7D15111DFFFD11427A4E /* libPods-NotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F78B53C8D3148DD2BA58F87 /* libPods-NotificationServiceExtension.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +71,10 @@
 		00E356EE1AD99517003FC87E /* PushengageReactNativeExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushengageReactNativeExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* PushengageReactNativeExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushengageReactNativeExampleTests.m; sourceTree = "<group>"; };
+		0DB9A3AB9CC36E45ED0F88E4 /* Pods-NotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtension/Pods-NotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		12C2628FDEE92B2F20B3D8BF /* Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.release.xcconfig"; path = "Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		1356E19A79252EE29DF3291D /* libPods-NotificationContentExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotificationContentExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1382B614AEA81ABA6A9A5901 /* Pods-PushengageReactNativeExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushengageReactNativeExample.release.xcconfig"; path = "Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* PushengageReactNativeExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushengageReactNativeExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = PushengageReactNativeExample/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = PushengageReactNativeExample/AppDelegate.mm; sourceTree = "<group>"; };
@@ -91,20 +95,16 @@
 		1D6A2F4B2D1935120025393B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		1D6A2F4D2D1935120025393B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D6A2F542D1935CA0025393B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		2CFD8D09D13955E717306A91 /* libPods-NotificationContentExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotificationContentExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2FA94C321498F67039BDA29A /* Pods-NotificationContentExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationContentExtension.debug.xcconfig"; path = "Target Support Files/Pods-NotificationContentExtension/Pods-NotificationContentExtension.debug.xcconfig"; sourceTree = "<group>"; };
-		3B4392A12AC88292D35C810B /* Pods-PushengageReactNativeExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushengageReactNativeExample.debug.xcconfig"; path = "Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample.debug.xcconfig"; sourceTree = "<group>"; };
-		48E5DE945075B9984AEB1082 /* Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.release.xcconfig"; path = "Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.release.xcconfig"; sourceTree = "<group>"; };
-		554434AA2AEC8F3A462BC3DD /* Pods-NotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtension/Pods-NotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-PushengageReactNativeExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushengageReactNativeExample.release.xcconfig"; path = "Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample.release.xcconfig"; sourceTree = "<group>"; };
-		7F78B53C8D3148DD2BA58F87 /* libPods-NotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D48180CAC7F8BDD87663DA1 /* libPods-NotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		46BFE5457977A00D9C846AF6 /* Pods-NotificationContentExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationContentExtension.release.xcconfig"; path = "Target Support Files/Pods-NotificationContentExtension/Pods-NotificationContentExtension.release.xcconfig"; sourceTree = "<group>"; };
+		50C15F5FBAB6FC41ACA92894 /* libPods-PushengageReactNativeExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PushengageReactNativeExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D62381610662476F8FC217D /* Pods-NotificationContentExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationContentExtension.debug.xcconfig"; path = "Target Support Files/Pods-NotificationContentExtension/Pods-NotificationContentExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = PushengageReactNativeExample/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8446B6488D201E5320C358F9 /* Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
-		8522731CA833EE396467A153 /* libPods-PushengageReactNativeExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PushengageReactNativeExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E75A81CA53633C084AE6C83 /* Pods-NotificationContentExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationContentExtension.release.xcconfig"; path = "Target Support Files/Pods-NotificationContentExtension/Pods-NotificationContentExtension.release.xcconfig"; sourceTree = "<group>"; };
-		C107BB036EB86D8B8FBD2277 /* Pods-NotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtension/Pods-NotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		945091651ACA15C17636E509 /* Pods-NotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-NotificationServiceExtension/Pods-NotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
+		BEB01D75D01914601AE4B6B7 /* Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DFCA9A617D89C29092A34706 /* Pods-PushengageReactNativeExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PushengageReactNativeExample.debug.xcconfig"; path = "Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample.debug.xcconfig"; sourceTree = "<group>"; };
+		E4CF33F1D6D3D40A2A03A58F /* libPods-PushengageReactNativeExample-PushengageReactNativeExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PushengageReactNativeExample-PushengageReactNativeExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F20DD22A28DE315355307F88 /* libPods-PushengageReactNativeExample-PushengageReactNativeExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PushengageReactNativeExample-PushengageReactNativeExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54EEFDA821EC12370DAD9982 /* libPods-PushengageReactNativeExample-PushengageReactNativeExampleTests.a in Frameworks */,
+				AE3962F915692CBC85AD7BC8 /* libPods-PushengageReactNativeExample-PushengageReactNativeExampleTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BEB32550DB294960FFD88FB /* libPods-PushengageReactNativeExample.a in Frameworks */,
+				5768EF13C8B573DAEFAB1C7E /* libPods-PushengageReactNativeExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3FB7D15111DFFFD11427A4E /* libPods-NotificationServiceExtension.a in Frameworks */,
+				60BA2868CA6E9B789177B094 /* libPods-NotificationServiceExtension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +138,7 @@
 			files = (
 				1D6A2F462D1935120025393B /* UserNotificationsUI.framework in Frameworks */,
 				1D6A2F442D1935120025393B /* UserNotifications.framework in Frameworks */,
-				6E69E421DD863ECC514F8AE4 /* libPods-NotificationContentExtension.a in Frameworks */,
+				36F965DE3D5B0A2A5679875A /* libPods-NotificationContentExtension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,12 +202,12 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				7F78B53C8D3148DD2BA58F87 /* libPods-NotificationServiceExtension.a */,
-				8522731CA833EE396467A153 /* libPods-PushengageReactNativeExample.a */,
-				F20DD22A28DE315355307F88 /* libPods-PushengageReactNativeExample-PushengageReactNativeExampleTests.a */,
 				1D6A2F432D1935120025393B /* UserNotifications.framework */,
 				1D6A2F452D1935120025393B /* UserNotificationsUI.framework */,
-				2CFD8D09D13955E717306A91 /* libPods-NotificationContentExtension.a */,
+				1356E19A79252EE29DF3291D /* libPods-NotificationContentExtension.a */,
+				2D48180CAC7F8BDD87663DA1 /* libPods-NotificationServiceExtension.a */,
+				50C15F5FBAB6FC41ACA92894 /* libPods-PushengageReactNativeExample.a */,
+				E4CF33F1D6D3D40A2A03A58F /* libPods-PushengageReactNativeExample-PushengageReactNativeExampleTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -251,14 +251,14 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-PushengageReactNativeExample.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-PushengageReactNativeExample.release.xcconfig */,
-				C107BB036EB86D8B8FBD2277 /* Pods-NotificationServiceExtension.debug.xcconfig */,
-				554434AA2AEC8F3A462BC3DD /* Pods-NotificationServiceExtension.release.xcconfig */,
-				8446B6488D201E5320C358F9 /* Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.debug.xcconfig */,
-				48E5DE945075B9984AEB1082 /* Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.release.xcconfig */,
-				2FA94C321498F67039BDA29A /* Pods-NotificationContentExtension.debug.xcconfig */,
-				8E75A81CA53633C084AE6C83 /* Pods-NotificationContentExtension.release.xcconfig */,
+				7D62381610662476F8FC217D /* Pods-NotificationContentExtension.debug.xcconfig */,
+				46BFE5457977A00D9C846AF6 /* Pods-NotificationContentExtension.release.xcconfig */,
+				0DB9A3AB9CC36E45ED0F88E4 /* Pods-NotificationServiceExtension.debug.xcconfig */,
+				945091651ACA15C17636E509 /* Pods-NotificationServiceExtension.release.xcconfig */,
+				DFCA9A617D89C29092A34706 /* Pods-PushengageReactNativeExample.debug.xcconfig */,
+				1382B614AEA81ABA6A9A5901 /* Pods-PushengageReactNativeExample.release.xcconfig */,
+				BEB01D75D01914601AE4B6B7 /* Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.debug.xcconfig */,
+				12C2628FDEE92B2F20B3D8BF /* Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -270,12 +270,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "PushengageReactNativeExampleTests" */;
 			buildPhases = (
-				CBCCD6E66EC14001F1E85F3C /* [CP] Check Pods Manifest.lock */,
+				CDBE0AA5822C595D7027673F /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				4030C085EB2A04CFC76FA770 /* [CP] Embed Pods Frameworks */,
-				D9539AD013228FEFEBE90AE0 /* [CP] Copy Pods Resources */,
+				B1E8CF676382C61A90353884 /* [CP] Embed Pods Frameworks */,
+				722990DFD3CD6E97066A4CF2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -291,14 +291,46 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "PushengageReactNativeExample" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				4E7F83A1E099097E41613607 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
 				1D294D672D156CBA002652C6 /* Embed Foundation Extensions */,
+				C0B736B98A4B44EA1C55A481 /* [CP] Embed Pods Frameworks */,
+				62619924496B09B36874F69D /* [CP] Copy Pods Resources */,
+				50329A1B11C7D5BA2C548619 /* Copy Hermes dSYM to Archive */,
+				AFCE0BEA485427FD97CB7FE8 /* Copy Hermes dSYM to Archive */,
+				FD2BBA235FF0B6A48EB240F9 /* Copy Hermes dSYM to Archive */,
+				9B7396C287E21379CAFB7C67 /* Copy Hermes dSYM to Archive */,
+				AD67B31E65413DDC73343882 /* Copy Hermes dSYM to Archive */,
+				4731EAD9DE3F792D5CCEE850 /* Copy Hermes dSYM to Archive */,
+				5DFC7E188A553D71F88822E7 /* Copy Hermes dSYM to Archive */,
+				979EDA72D326ECFBA5F55D24 /* Copy Hermes dSYM to Archive */,
+				5FB330D67DB4857B3211ED5F /* Copy Hermes dSYM to Archive */,
+				11D373B10012EF3DDC796710 /* Copy Hermes dSYM to Archive */,
+				33DB280F25D2F6842FC08CB8 /* Copy Hermes dSYM to Archive */,
+				E8D5A290D642B9363FE6B2E0 /* Copy Hermes dSYM to Archive */,
+				E4147DAD12D5923551B003BA /* Copy Hermes dSYM to Archive */,
+				024635610678B3FFAD495E79 /* Copy Hermes dSYM to Archive */,
+				023E7EDC89AFCA5B00F079FB /* Copy Hermes dSYM to Archive */,
+				D185F065BFFB3EB155F242B2 /* Copy Hermes dSYM to Archive */,
+				C2AA29E29E23F6473A1EBC6A /* Copy Hermes dSYM to Archive */,
+				8CF329D4E676D2718FE84849 /* Copy Hermes dSYM to Archive */,
+				54F38E00818FE76B52E76F00 /* Copy Hermes dSYM to Archive */,
+				DC5A149BD9178F3FBF3DB14A /* Copy Hermes dSYM to Archive */,
+				C6C3850C0049093680E1ED2D /* Copy Hermes dSYM to Archive */,
+				25B1110CFDD39D3492A6FAFF /* Copy Hermes dSYM to Archive */,
+				E5FDE8B7A82487DE4F62927A /* Copy Hermes dSYM to Archive */,
+				7094412E768611568ABF4C02 /* Copy Hermes dSYM to Archive */,
+				BE261B69DBF51A1533E5E17D /* Copy Hermes dSYM to Archive */,
+				3C73DF6B88F0D957EDF6F054 /* Copy Hermes dSYM to Archive */,
+				5AC408657814E9D421E76EAF /* Copy Hermes dSYM to Archive */,
+				3317112AEB5F1FE220457498 /* Copy Hermes dSYM to Archive */,
+				DE9B9CF663FC6A228C3FE933 /* Copy Hermes dSYM to Archive */,
+				78A3A11263384477E8ADC110 /* Copy Hermes dSYM to Archive */,
+				AADDAFC6F16D259CC5E2A26F /* Copy Hermes dSYM to Archive */,
+				A4209D80CA53CB33FB9A28EC /* Copy Hermes dSYM to Archive */,
 			);
 			buildRules = (
 			);
@@ -315,7 +347,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D294D6A2D156CBA002652C6 /* Build configuration list for PBXNativeTarget "NotificationServiceExtension" */;
 			buildPhases = (
-				9AFA812236FC56D0D105BB88 /* [CP] Check Pods Manifest.lock */,
+				45B7193CD4BF06A41318A1C4 /* [CP] Check Pods Manifest.lock */,
 				1D294D5B2D156CBA002652C6 /* Sources */,
 				1D294D5C2D156CBA002652C6 /* Frameworks */,
 				1D294D5D2D156CBA002652C6 /* Resources */,
@@ -333,7 +365,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6A2F512D1935120025393B /* Build configuration list for PBXNativeTarget "NotificationContentExtension" */;
 			buildPhases = (
-				A2228A6F6EC7724F2E7FB019 /* [CP] Check Pods Manifest.lock */,
+				BD7BF7FEFAD8612034214D94 /* [CP] Check Pods Manifest.lock */,
 				1D6A2F3E2D1935120025393B /* Sources */,
 				1D6A2F3F2D1935120025393B /* Frameworks */,
 				1D6A2F402D1935120025393B /* Resources */,
@@ -445,41 +477,133 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
+		023E7EDC89AFCA5B00F079FB /* Copy Hermes dSYM to Archive */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
 		};
-		4030C085EB2A04CFC76FA770 /* [CP] Embed Pods Frameworks */ = {
+		024635610678B3FFAD495E79 /* Copy Hermes dSYM to Archive */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
 		};
-		9AFA812236FC56D0D105BB88 /* [CP] Check Pods Manifest.lock */ = {
+		11D373B10012EF3DDC796710 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		25B1110CFDD39D3492A6FAFF /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		3317112AEB5F1FE220457498 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		33DB280F25D2F6842FC08CB8 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		3C73DF6B88F0D957EDF6F054 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		45B7193CD4BF06A41318A1C4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -501,7 +625,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A2228A6F6EC7724F2E7FB019 /* [CP] Check Pods Manifest.lock */ = {
+		4731EAD9DE3F792D5CCEE850 /* Copy Hermes dSYM to Archive */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -509,21 +633,17 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "Copy Hermes dSYM to Archive";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NotificationContentExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  \n  # Find Hermes dSYM in build products\n  HERMES_DSYM_PATHS=(\n    \"${BUILT_PRODUCTS_DIR}/hermes.framework.dSYM\"\n    \"${TARGET_BUILD_DIR}/hermes.framework.dSYM\"\n    \"${CONFIGURATION_BUILD_DIR}/hermes.framework.dSYM\"\n  )\n  \n  HERMES_DSYM_PATH=\"\"\n  for path in \"${HERMES_DSYM_PATHS[@]}\"; do\n    if [ -d \"$path\" ]; then\n      HERMES_DSYM_PATH=\"$path\"\n      echo \"📍 Found Hermes dSYM at: $path\"\n      break\n    fi\n  done\n  \n  if [ -n \"$HERMES_DSYM_PATH\" ]; then\n    # Ensure the dSYM is copied to the archive\n    ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n    if [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n      echo \"📦 Copying Hermes dSYM to archive...\"\n      cp -R \"$HERMES_DSYM_PATH\" \"$ARCHIVE_DSYM_DIR/\"\n      echo \"✅ Hermes dSYM copied to archive successfully\"\n    else\n      echo \"⚠️  Archive dSYM directory not found\"\n    fi\n  else\n    echo \"⚠️  Hermes dSYM not found in build products\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
 		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		4E7F83A1E099097E41613607 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -545,7 +665,403 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CBCCD6E66EC14001F1E85F3C /* [CP] Check Pods Manifest.lock */ = {
+		50329A1B11C7D5BA2C548619 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  \n  # Find Hermes dSYM in build products\n  HERMES_DSYM_PATHS=(\n    \"${BUILT_PRODUCTS_DIR}/hermes.framework.dSYM\"\n    \"${TARGET_BUILD_DIR}/hermes.framework.dSYM\"\n    \"${CONFIGURATION_BUILD_DIR}/hermes.framework.dSYM\"\n  )\n  \n  HERMES_DSYM_PATH=\"\"\n  for path in \"${HERMES_DSYM_PATHS[@]}\"; do\n    if [ -d \"$path\" ]; then\n      HERMES_DSYM_PATH=\"$path\"\n      echo \"📍 Found Hermes dSYM at: $path\"\n      break\n    fi\n  done\n  \n  if [ -n \"$HERMES_DSYM_PATH\" ]; then\n    # Ensure the dSYM is copied to the archive\n    ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n    if [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n      echo \"📦 Copying Hermes dSYM to archive...\"\n      cp -R \"$HERMES_DSYM_PATH\" \"$ARCHIVE_DSYM_DIR/\"\n      echo \"✅ Hermes dSYM copied to archive successfully\"\n    else\n      echo \"⚠️  Archive dSYM directory not found\"\n    fi\n  else\n    echo \"⚠️  Hermes dSYM not found in build products\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		54F38E00818FE76B52E76F00 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		5AC408657814E9D421E76EAF /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		5DFC7E188A553D71F88822E7 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  \n  # Find Hermes dSYM in build products\n  HERMES_DSYM_PATHS=(\n    \"${BUILT_PRODUCTS_DIR}/hermes.framework.dSYM\"\n    \"${TARGET_BUILD_DIR}/hermes.framework.dSYM\"\n    \"${CONFIGURATION_BUILD_DIR}/hermes.framework.dSYM\"\n  )\n  \n  HERMES_DSYM_PATH=\"\"\n  for path in \"${HERMES_DSYM_PATHS[@]}\"; do\n    if [ -d \"$path\" ]; then\n      HERMES_DSYM_PATH=\"$path\"\n      echo \"📍 Found Hermes dSYM at: $path\"\n      break\n    fi\n  done\n  \n  if [ -n \"$HERMES_DSYM_PATH\" ]; then\n    # Ensure the dSYM is copied to the archive\n    ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n    if [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n      echo \"📦 Copying Hermes dSYM to archive...\"\n      cp -R \"$HERMES_DSYM_PATH\" \"$ARCHIVE_DSYM_DIR/\"\n      echo \"✅ Hermes dSYM copied to archive successfully\"\n    else\n      echo \"⚠️  Archive dSYM directory not found\"\n    fi\n  else\n    echo \"⚠️  Hermes dSYM not found in build products\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		5FB330D67DB4857B3211ED5F /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		62619924496B09B36874F69D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7094412E768611568ABF4C02 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		722990DFD3CD6E97066A4CF2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		78A3A11263384477E8ADC110 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		8CF329D4E676D2718FE84849 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		979EDA72D326ECFBA5F55D24 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  \n  # Find Hermes dSYM in build products\n  HERMES_DSYM_PATHS=(\n    \"${BUILT_PRODUCTS_DIR}/hermes.framework.dSYM\"\n    \"${TARGET_BUILD_DIR}/hermes.framework.dSYM\"\n    \"${CONFIGURATION_BUILD_DIR}/hermes.framework.dSYM\"\n  )\n  \n  HERMES_DSYM_PATH=\"\"\n  for path in \"${HERMES_DSYM_PATHS[@]}\"; do\n    if [ -d \"$path\" ]; then\n      HERMES_DSYM_PATH=\"$path\"\n      echo \"📍 Found Hermes dSYM at: $path\"\n      break\n    fi\n  done\n  \n  if [ -n \"$HERMES_DSYM_PATH\" ]; then\n    # Ensure the dSYM is copied to the archive\n    ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n    if [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n      echo \"📦 Copying Hermes dSYM to archive...\"\n      cp -R \"$HERMES_DSYM_PATH\" \"$ARCHIVE_DSYM_DIR/\"\n      echo \"✅ Hermes dSYM copied to archive successfully\"\n    else\n      echo \"⚠️  Archive dSYM directory not found\"\n    fi\n  else\n    echo \"⚠️  Hermes dSYM not found in build products\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		9B7396C287E21379CAFB7C67 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  \n  # Find Hermes dSYM in build products\n  HERMES_DSYM_PATHS=(\n    \"${BUILT_PRODUCTS_DIR}/hermes.framework.dSYM\"\n    \"${TARGET_BUILD_DIR}/hermes.framework.dSYM\"\n    \"${CONFIGURATION_BUILD_DIR}/hermes.framework.dSYM\"\n  )\n  \n  HERMES_DSYM_PATH=\"\"\n  for path in \"${HERMES_DSYM_PATHS[@]}\"; do\n    if [ -d \"$path\" ]; then\n      HERMES_DSYM_PATH=\"$path\"\n      echo \"📍 Found Hermes dSYM at: $path\"\n      break\n    fi\n  done\n  \n  if [ -n \"$HERMES_DSYM_PATH\" ]; then\n    # Ensure the dSYM is copied to the archive\n    ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n    if [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n      echo \"📦 Copying Hermes dSYM to archive...\"\n      cp -R \"$HERMES_DSYM_PATH\" \"$ARCHIVE_DSYM_DIR/\"\n      echo \"✅ Hermes dSYM copied to archive successfully\"\n    else\n      echo \"⚠️  Archive dSYM directory not found\"\n    fi\n  else\n    echo \"⚠️  Hermes dSYM not found in build products\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		A4209D80CA53CB33FB9A28EC /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		AADDAFC6F16D259CC5E2A26F /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		AD67B31E65413DDC73343882 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  \n  # Find Hermes dSYM in build products\n  HERMES_DSYM_PATHS=(\n    \"${BUILT_PRODUCTS_DIR}/hermes.framework.dSYM\"\n    \"${TARGET_BUILD_DIR}/hermes.framework.dSYM\"\n    \"${CONFIGURATION_BUILD_DIR}/hermes.framework.dSYM\"\n  )\n  \n  HERMES_DSYM_PATH=\"\"\n  for path in \"${HERMES_DSYM_PATHS[@]}\"; do\n    if [ -d \"$path\" ]; then\n      HERMES_DSYM_PATH=\"$path\"\n      echo \"📍 Found Hermes dSYM at: $path\"\n      break\n    fi\n  done\n  \n  if [ -n \"$HERMES_DSYM_PATH\" ]; then\n    # Ensure the dSYM is copied to the archive\n    ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n    if [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n      echo \"📦 Copying Hermes dSYM to archive...\"\n      cp -R \"$HERMES_DSYM_PATH\" \"$ARCHIVE_DSYM_DIR/\"\n      echo \"✅ Hermes dSYM copied to archive successfully\"\n    else\n      echo \"⚠️  Archive dSYM directory not found\"\n    fi\n  else\n    echo \"⚠️  Hermes dSYM not found in build products\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		AFCE0BEA485427FD97CB7FE8 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  \n  # Find Hermes dSYM in build products\n  HERMES_DSYM_PATHS=(\n    \"${BUILT_PRODUCTS_DIR}/hermes.framework.dSYM\"\n    \"${TARGET_BUILD_DIR}/hermes.framework.dSYM\"\n    \"${CONFIGURATION_BUILD_DIR}/hermes.framework.dSYM\"\n  )\n  \n  HERMES_DSYM_PATH=\"\"\n  for path in \"${HERMES_DSYM_PATHS[@]}\"; do\n    if [ -d \"$path\" ]; then\n      HERMES_DSYM_PATH=\"$path\"\n      echo \"📍 Found Hermes dSYM at: $path\"\n      break\n    fi\n  done\n  \n  if [ -n \"$HERMES_DSYM_PATH\" ]; then\n    # Ensure the dSYM is copied to the archive\n    ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n    if [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n      echo \"📦 Copying Hermes dSYM to archive...\"\n      cp -R \"$HERMES_DSYM_PATH\" \"$ARCHIVE_DSYM_DIR/\"\n      echo \"✅ Hermes dSYM copied to archive successfully\"\n    else\n      echo \"⚠️  Archive dSYM directory not found\"\n    fi\n  else\n    echo \"⚠️  Hermes dSYM not found in build products\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		B1E8CF676382C61A90353884 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD7BF7FEFAD8612034214D94 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NotificationContentExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BE261B69DBF51A1533E5E17D /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		C0B736B98A4B44EA1C55A481 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C2AA29E29E23F6473A1EBC6A /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		C6C3850C0049093680E1ED2D /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		CDBE0AA5822C595D7027673F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -567,39 +1083,131 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D9539AD013228FEFEBE90AE0 /* [CP] Copy Pods Resources */ = {
+		D185F065BFFB3EB155F242B2 /* Copy Hermes dSYM to Archive */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
 		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
+		DC5A149BD9178F3FBF3DB14A /* Copy Hermes dSYM to Archive */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample-resources.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		DE9B9CF663FC6A228C3FE933 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		E4147DAD12D5923551B003BA /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		E5FDE8B7A82487DE4F62927A /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		E8D5A290D642B9363FE6B2E0 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
+		};
+		FD2BBA235FF0B6A48EB240F9 /* Copy Hermes dSYM to Archive */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Hermes dSYM to Archive";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  \n  # Find Hermes dSYM in build products\n  HERMES_DSYM_PATHS=(\n    \"${BUILT_PRODUCTS_DIR}/hermes.framework.dSYM\"\n    \"${TARGET_BUILD_DIR}/hermes.framework.dSYM\"\n    \"${CONFIGURATION_BUILD_DIR}/hermes.framework.dSYM\"\n  )\n  \n  HERMES_DSYM_PATH=\"\"\n  for path in \"${HERMES_DSYM_PATHS[@]}\"; do\n    if [ -d \"$path\" ]; then\n      HERMES_DSYM_PATH=\"$path\"\n      echo \"📍 Found Hermes dSYM at: $path\"\n      break\n    fi\n  done\n  \n  if [ -n \"$HERMES_DSYM_PATH\" ]; then\n    # Ensure the dSYM is copied to the archive\n    ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n    if [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n      echo \"📦 Copying Hermes dSYM to archive...\"\n      cp -R \"$HERMES_DSYM_PATH\" \"$ARCHIVE_DSYM_DIR/\"\n      echo \"✅ Hermes dSYM copied to archive successfully\"\n    else\n      echo \"⚠️  Archive dSYM directory not found\"\n    fi\n  else\n    echo \"⚠️  Hermes dSYM not found in build products\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -672,7 +1280,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8446B6488D201E5320C358F9 /* Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.debug.xcconfig */;
+			baseConfigurationReference = BEB01D75D01914601AE4B6B7 /* Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 38PU74KZ48;
@@ -700,7 +1308,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 48E5DE945075B9984AEB1082 /* Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.release.xcconfig */;
+			baseConfigurationReference = 12C2628FDEE92B2F20B3D8BF /* Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -725,7 +1333,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-PushengageReactNativeExample.debug.xcconfig */;
+			baseConfigurationReference = DFCA9A617D89C29092A34706 /* Pods-PushengageReactNativeExample.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -741,7 +1349,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -757,7 +1365,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-PushengageReactNativeExample.release.xcconfig */;
+			baseConfigurationReference = 1382B614AEA81ABA6A9A5901 /* Pods-PushengageReactNativeExample.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -772,7 +1380,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -787,7 +1395,7 @@
 		};
 		1D294D682D156CBA002652C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C107BB036EB86D8B8FBD2277 /* Pods-NotificationServiceExtension.debug.xcconfig */;
+			baseConfigurationReference = 0DB9A3AB9CC36E45ED0F88E4 /* Pods-NotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -814,7 +1422,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = pushengagereactnative.example.NotificationServiceExtensionSwift;
@@ -830,7 +1438,7 @@
 		};
 		1D294D692D156CBA002652C6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 554434AA2AEC8F3A462BC3DD /* Pods-NotificationServiceExtension.release.xcconfig */;
+			baseConfigurationReference = 945091651ACA15C17636E509 /* Pods-NotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -858,7 +1466,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.3;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = pushengagereactnative.example.NotificationServiceExtensionSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -872,7 +1480,7 @@
 		};
 		1D6A2F522D1935120025393B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2FA94C321498F67039BDA29A /* Pods-NotificationContentExtension.debug.xcconfig */;
+			baseConfigurationReference = 7D62381610662476F8FC217D /* Pods-NotificationContentExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -898,7 +1506,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = pushengagereactnative.example.NotificationContentExtension;
@@ -914,7 +1522,7 @@
 		};
 		1D6A2F532D1935120025393B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8E75A81CA53633C084AE6C83 /* Pods-NotificationContentExtension.release.xcconfig */;
+			baseConfigurationReference = 46BFE5457977A00D9C846AF6 /* Pods-NotificationContentExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -941,7 +1549,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.3;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = pushengagereactnative.example.NotificationContentExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";

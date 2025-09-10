@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import PushEngage from '@pushengage/pushengage-react-native';
+import { useState } from 'react';
 import {
-  View,
+  Alert,
+  Keyboard,
+  Platform,
+  ScrollView,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
-  ScrollView,
   TouchableWithoutFeedback,
-  Keyboard,
-  Platform,
-  Alert,
+  View,
 } from 'react-native';
-import PushEngage from '@pushengage/pushengage-react-native';
 
 const SendGoalScreen = () => {
   const [goalName, setGoalName] = useState('');
@@ -20,11 +20,25 @@ const SendGoalScreen = () => {
 
   const sendGoal = async () => {
     try {
-      const goal = {
+      const goal: Record<string, string | number> = {
         name: goalName,
-        count: parseInt(count, 10),
-        value: parseFloat(value) || null,
       };
+
+      // Only add count if it's provided and valid
+      if (count && count.trim() !== '') {
+        const parsedCount = parseInt(count, 10);
+        if (!isNaN(parsedCount)) {
+          goal.count = parsedCount;
+        }
+      }
+
+      // Only add value if it's provided and valid
+      if (value && value.trim() !== '') {
+        const parsedValue = parseFloat(value);
+        if (!isNaN(parsedValue)) {
+          goal.value = parsedValue;
+        }
+      }
 
       const response = await PushEngage.sendGoal(goal);
       Alert.alert('Success', response || 'Goal sent successfully');
@@ -43,17 +57,17 @@ const SendGoalScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard}>
       <View style={styles.container}>
-        <ScrollView 
+        <ScrollView
           contentContainerStyle={styles.scrollContent}
-          keyboardShouldPersistTaps="handled"
+          keyboardShouldPersistTaps='handled'
         >
           <Text style={styles.label}>Enter Goal Name</Text>
           <TextInput
             style={styles.input}
             value={goalName}
             onChangeText={setGoalName}
-            placeholder="enter name"
-            placeholderTextColor="#999"
+            placeholder='enter name'
+            placeholderTextColor='#999'
           />
 
           <Text style={styles.label}>Enter Count</Text>
@@ -61,9 +75,9 @@ const SendGoalScreen = () => {
             style={styles.input}
             value={count}
             onChangeText={setCount}
-            placeholder="enter count"
-            placeholderTextColor="#999"
-            keyboardType="numeric"
+            placeholder='enter count'
+            placeholderTextColor='#999'
+            keyboardType='numeric'
           />
 
           <Text style={styles.label}>Enter Value</Text>
@@ -71,12 +85,12 @@ const SendGoalScreen = () => {
             style={styles.input}
             value={value}
             onChangeText={setValue}
-            placeholder="enter value"
-            placeholderTextColor="#999"
-            keyboardType="numeric"
+            placeholder='enter value'
+            placeholderTextColor='#999'
+            keyboardType='numeric'
           />
 
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.button}
             onPress={() => {
               sendGoal();

@@ -1,5 +1,4 @@
-import type { TurboModule } from 'react-native';
-import { TurboModuleRegistry } from 'react-native';
+import { TurboModuleRegistry, type TurboModule } from 'react-native';
 import type { EventEmitter } from 'react-native/Libraries/Types/CodegenTypes';
 
 /**
@@ -74,7 +73,9 @@ export interface Spec extends TurboModule {
    * @param goal - Object containing goal data.
    * @returns Promise resolving to result string or null.
    */
-  sendGoal: (goal: { [key: string]: string }) => Promise<string | null>;
+  sendGoal: (goal: {
+    [key: string]: string | number;
+  }) => Promise<string | null>;
 
   /**
    * Adds an alert to be triggered.
@@ -82,7 +83,9 @@ export interface Spec extends TurboModule {
    * @param alert - Object containing alert data.
    * @returns Promise resolving to result string or null.
    */
-  addAlert: (alert: { [key: string]: string }) => Promise<string | null>;
+  addAlert: (alert: {
+    [key: string]: string | number | undefined;
+  }) => Promise<string | null>;
 
   /**
    * Retrieves subscriber details based on provided values.
@@ -92,21 +95,102 @@ export interface Spec extends TurboModule {
    */
   getSubscriberDetails: (
     values: string[] | null
-  ) => Promise<{ [key: string]: string } | null>;
+  ) => Promise<{ [key: string]: string | number | boolean } | null>;
 
   /**
    * Requests notification permission from the user.
+   * For Android 13 (API 33) and above, this will show the system permission dialog.
+   * For older versions, the permission is automatically granted and the promise
+   * will resolve with granted=true.
    *
-   * @returns Promise resolving to boolean indicating permission status.
+   * When permission is granted, the SDK automatically calls PushEngage.subscribe()
+   * for you, so you don't need to call it manually.
+   *
+   * @returns Promise that resolves with boolean indicating if permission was granted
+   * @throws Error if permission request fails
    */
   requestNotificationPermission: () => Promise<boolean>;
+
+  /**
+   * Get the current notification permission status.
+   *
+   * Use this method to retrieve the current notification permission status for
+   * the application. This method returns the permission status synchronously as a string.
+   *
+   * @returns A string indicating the current notification permission state:
+   *          - "granted": The application is authorized to post user notifications
+   *          - "denied": The application is not authorized to post user notifications
+   *          - "notYetRequested": (iOS only) The user has not yet made a choice regarding notification permissions
+   */
+  getNotificationPermissionStatus: () => string;
+
+  /**
+   * Get the current subscription status for push notifications.
+   *
+   * This method checks if the user is subscribed to the push notification service.
+   *
+   * @returns Promise that resolves with boolean indicating if user is subscribed
+   * @throws Error if the subscription status check fails
+   */
+  getSubscriptionStatus: () => Promise<boolean>;
+
+  /**
+   * Get the current subscription notification status.
+   *
+   * This method checks if the user is both subscribed to push notifications AND
+   * has system notification permission granted. This represents the complete
+   * ability to receive push notifications.
+   *
+   * @returns Promise that resolves with boolean indicating if user can receive notifications
+   * @throws Error if the status check fails
+   */
+  getSubscriptionNotificationStatus: () => Promise<boolean>;
+
+  /**
+   * Get Subscriber ID.
+   *
+   * Use this method to retrieve the unique subscriber ID for a user. PushEngage
+   * generates this ID for every user based on their subscription data. Sometimes,
+   * this ID is referred to as the 'subscriber_hash'. The subscriber ID remains
+   * consistent unless there's a change in the user's subscription.
+   *
+   * @returns Promise that resolves with subscriber ID string or null if not available
+   * @throws Error if the operation fails
+   */
+  getSubscriberId: () => Promise<string | null>;
+
+  /**
+   * Manually unsubscribe the user from push notifications.
+   *
+   * This method unsubscribes the user from receiving push notifications while
+   * preserving their subscription record. The user can be re-subscribed later
+   * using the subscribe() method.
+   *
+   * @returns Promise that resolves when unsubscribe operation completes successfully
+   * @throws Error if the unsubscribe operation fails
+   */
+  unsubscribe: () => Promise<void>;
+
+  /**
+   * Manually subscribe the user to push notifications.
+   *
+   * This method subscribes the user to push notifications. The implementation
+   * matches iOS logic for cross-platform consistency. It checks permission status
+   * and subscriber hash to determine the appropriate action.
+   *
+   * @returns Promise that resolves when subscribe operation completes successfully
+   * @throws Error if the subscribe operation fails
+   */
+  subscribe: () => Promise<void>;
 
   /**
    * Retrieves the attributes of a subscriber.
    *
    * @returns Promise resolving to subscriber attributes or null.
    */
-  getSubscriberAttributes: () => Promise<{ [key: string]: string } | null>;
+  getSubscriberAttributes: () => Promise<{
+    [key: string]: string | number | boolean;
+  } | null>;
 
   /**
    * Adds subscriber to segments.
@@ -127,11 +211,19 @@ export interface Spec extends TurboModule {
   /**
    * Adds subscriber to dynamic segments.
    *
-   * @param segments - Array of dynamic segment objects.
+   * @param segments - Array of dynamic segment objects with name (string) and duration (number).
    * @returns Promise resolving to result string or null.
+   * @example
+   * ```typescript
+   * const segments = [
+   *   { name: 'premium_users', duration: 30 },
+   *   { name: 'mobile_users', duration: 7 }
+   * ];
+   * await PushEngage.addDynamicSegment(segments);
+   * ```
    */
   addDynamicSegment: (
-    segments: { [key: string]: string }[]
+    segments: { name: string; duration: number }[]
   ) => Promise<string | null>;
 
   /**

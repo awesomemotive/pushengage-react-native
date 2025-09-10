@@ -6,12 +6,12 @@
 	<dict>
 		<key>NSExtensionAttributes</key>
 		<dict>
-			<key>UNNotificationExtensionDefaultContentHidden</key>
-			<string>YES</string>
 			<key>UNNotificationExtensionCategory</key>
 			<array>
 				<string>customNotification</string>
 			</array>
+			<key>UNNotificationExtensionDefaultContentHidden</key>
+			<string>YES</string>
 			<key>UNNotificationExtensionInitialContentSizeRatio</key>
 			<real>0.5</real>
 		</dict>
@@ -20,5 +20,7 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.usernotifications.content-extension</string>
 	</dict>
+	<key>RCTNewArchEnabled</key>
+	<true/>
 </dict>
 </plist>

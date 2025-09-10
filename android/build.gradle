@@ -11,6 +11,7 @@ buildscript {
     classpath "com.android.tools.build:gradle:7.2.1"
     // noinspection DifferentKotlinGradleVersion
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
   }
 }
 
@@ -25,6 +26,7 @@ def isNewArchitectureEnabled() {
 
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
+
 
 if (isNewArchitectureEnabled()) {
   apply plugin: "com.facebook.react"
@@ -81,6 +83,8 @@ android {
     disable "GradleCompatible"
   }
 
+
+
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
@@ -111,7 +115,7 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'com.github.awesomemotive:pushengage-android-sdk:0.0.5'
+  implementation 'com.github.awesomemotive:pushengage-android-sdk:0.0.6'
 }
 
 if (isNewArchitectureEnabled()) {
