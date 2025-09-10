@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import PushEngage from '@pushengage/pushengage-react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { useState } from 'react';
 import {
-  View,
+  Alert,
+  Modal,
+  ScrollView,
+  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
-  Alert,
-  ScrollView,
+  View,
 } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import Modal from 'react-native-modal';
-import PushEngage from '@pushengage/pushengage-react-native';
 
 enum SelectedType {
   PriceDrop = 'Price Drop',
@@ -42,12 +42,23 @@ const AlertEntryScreen = () => {
   const [valueInput, setValueInput] = useState('');
   const [dataList, setDataList] = useState<DataItem[]>([]);
   const [isTypeModalVisible, setIsTypeModalVisible] = useState(false);
-  const [isAvailabilityModalVisible, setIsAvailabilityModalVisible] = useState(false);
+  const [isAvailabilityModalVisible, setIsAvailabilityModalVisible] =
+    useState(false);
 
   const formatDate = (date: Date) => {
     const monthNames = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return `${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`;
   };
@@ -68,7 +79,10 @@ const AlertEntryScreen = () => {
 
   const addData = () => {
     if (keyInput.trim() && valueInput.trim()) {
-      setDataList([...dataList, { key: keyInput.trim(), value: valueInput.trim() }]);
+      setDataList([
+        ...dataList,
+        { key: keyInput.trim(), value: valueInput.trim() },
+      ]);
       setKeyInput('');
       setValueInput('');
     }
@@ -79,10 +93,13 @@ const AlertEntryScreen = () => {
   };
 
   const combineMaps = () => {
-    return dataList.reduce((acc, item) => {
-      acc[item.key] = item.value;
-      return acc;
-    }, {} as { [key: string]: string });
+    return dataList.reduce(
+      (acc, item) => {
+        acc[item.key] = item.value;
+        return acc;
+      },
+      {} as { [key: string]: string }
+    );
   };
 
   const addAlert = async () => {
@@ -93,14 +110,16 @@ const AlertEntryScreen = () => {
         productId,
         link,
         price: parseFloat(price) || 0,
-        variantId: variantId || null,
-        expiryTimestamp: getCombinedDateTime()?.toISOString(),
-        alertPrice: alertPrice ? parseFloat(alertPrice) : null,
+        ...(variantId && { variantId }),
+        ...(getCombinedDateTime() && {
+          expiryTimestamp: getCombinedDateTime()!.toISOString(),
+        }),
+        alertPrice: alertPrice ? parseFloat(alertPrice) : undefined,
         availability:
-          selectedAvailability === 'Out of Stock' ? 'outOfStock' : null,
-        profileId: profileId || null,
-        mrp: mrp ? parseFloat(mrp) : null,
-        data: combineMaps(),
+          selectedAvailability === 'Out of Stock' ? 'outOfStock' : '',
+        ...(profileId && { profileId }),
+        mrp: mrp ? parseFloat(mrp) : undefined,
+        ...combineMaps(),
       };
 
       const response = await PushEngage.addAlert(alert);
@@ -124,7 +143,7 @@ const AlertEntryScreen = () => {
       value={value}
       onChangeText={onChangeText}
       placeholder={placeholder}
-      placeholderTextColor="#999"
+      placeholderTextColor='#999'
       keyboardType={keyboardType}
     />
   );
@@ -133,7 +152,7 @@ const AlertEntryScreen = () => {
     <ScrollView style={styles.container}>
       {renderTextField(profileId, setProfileId, 'Enter profile id')}
       <View style={styles.spacing} />
-      
+
       {renderTextField(mrp, setMrp, 'MRP', 'numeric')}
       <View style={styles.spacing} />
 
@@ -147,17 +166,22 @@ const AlertEntryScreen = () => {
 
       {renderTextField(productId, setProductId, 'Enter product id')}
       <View style={styles.spacing} />
-      
+
       {renderTextField(link, setLink, 'Enter link')}
       <View style={styles.spacing} />
-      
+
       {renderTextField(price, setPrice, 'Enter price', 'numeric')}
       <View style={styles.spacing} />
-      
+
       {renderTextField(variantId, setVariantId, 'Enter variant id')}
       <View style={styles.spacing} />
-      
-      {renderTextField(alertPrice, setAlertPrice, 'Enter alert price', 'numeric')}
+
+      {renderTextField(
+        alertPrice,
+        setAlertPrice,
+        'Enter alert price',
+        'numeric'
+      )}
       <View style={styles.spacing} />
 
       <Text style={styles.label}>Select expiry time</Text>
@@ -184,7 +208,7 @@ const AlertEntryScreen = () => {
       {showDatePicker && (
         <DateTimePicker
           value={selectedDate || new Date()}
-          mode="date"
+          mode='date'
           onChange={(_, date) => {
             setShowDatePicker(false);
             if (date) setSelectedDate(date);
@@ -195,8 +219,8 @@ const AlertEntryScreen = () => {
       {showTimePicker && (
         <DateTimePicker
           value={selectedTime || new Date()}
-          mode="time"
-          onChange={(event, date) => {
+          mode='time'
+          onChange={(_, date) => {
             setShowTimePicker(false);
             if (date) setSelectedTime(date);
           }}
@@ -221,16 +245,16 @@ const AlertEntryScreen = () => {
           style={[styles.input, styles.flex1]}
           value={keyInput}
           onChangeText={setKeyInput}
-          placeholder="Key"
-          placeholderTextColor="#999"
+          placeholder='Key'
+          placeholderTextColor='#999'
         />
         <View style={styles.smallSpacing} />
         <TextInput
           style={[styles.input, styles.flex1]}
           value={valueInput}
           onChangeText={setValueInput}
-          placeholder="Value"
-          placeholderTextColor="#999"
+          placeholder='Value'
+          placeholderTextColor='#999'
         />
         <View style={styles.smallSpacing} />
         <TouchableOpacity style={styles.addButton} onPress={addData}>
@@ -257,56 +281,72 @@ const AlertEntryScreen = () => {
       </TouchableOpacity>
 
       <Modal
-        isVisible={isTypeModalVisible}
-        onBackdropPress={() => setIsTypeModalVisible(false)}
-        style={styles.modalContainer}
+        visible={isTypeModalVisible}
+        transparent
+        animationType='slide'
+        onRequestClose={() => setIsTypeModalVisible(false)}
       >
-        <View style={styles.pickerModalContent}>
+        <View style={styles.modalContainer}>
           <TouchableOpacity
-            style={styles.pickerButton}
-            onPress={() => {
-              setSelectedType(SelectedType.PriceDrop);
-              setIsTypeModalVisible(false);
-            }}
-          >
-            <Text style={styles.pickerButtonText}>Price Drop</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.pickerButton}
-            onPress={() => {
-              setSelectedType(SelectedType.Inventory);
-              setIsTypeModalVisible(false);
-            }}
-          >
-            <Text style={styles.pickerButtonText}>Inventory</Text>
-          </TouchableOpacity>
+            style={styles.modalBackdrop}
+            activeOpacity={1}
+            onPress={() => setIsTypeModalVisible(false)}
+          />
+          <View style={styles.pickerModalContent}>
+            <TouchableOpacity
+              style={styles.pickerButton}
+              onPress={() => {
+                setSelectedType(SelectedType.PriceDrop);
+                setIsTypeModalVisible(false);
+              }}
+            >
+              <Text style={styles.pickerButtonText}>Price Drop</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.pickerButton}
+              onPress={() => {
+                setSelectedType(SelectedType.Inventory);
+                setIsTypeModalVisible(false);
+              }}
+            >
+              <Text style={styles.pickerButtonText}>Inventory</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </Modal>
 
       <Modal
-        isVisible={isAvailabilityModalVisible}
-        onBackdropPress={() => setIsAvailabilityModalVisible(false)}
-        style={styles.modalContainer}
+        visible={isAvailabilityModalVisible}
+        transparent
+        animationType='slide'
+        onRequestClose={() => setIsAvailabilityModalVisible(false)}
       >
-        <View style={styles.pickerModalContent}>
+        <View style={styles.modalContainer}>
           <TouchableOpacity
-            style={styles.pickerButton}
-            onPress={() => {
-              setSelectedAvailability('Nil');
-              setIsAvailabilityModalVisible(false);
-            }}
-          >
-            <Text style={styles.pickerButtonText}>Nil</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.pickerButton}
-            onPress={() => {
-              setSelectedAvailability('Out of Stock');
-              setIsAvailabilityModalVisible(false);
-            }}
-          >
-            <Text style={styles.pickerButtonText}>Out of Stock</Text>
-          </TouchableOpacity>
+            style={styles.modalBackdrop}
+            activeOpacity={1}
+            onPress={() => setIsAvailabilityModalVisible(false)}
+          />
+          <View style={styles.pickerModalContent}>
+            <TouchableOpacity
+              style={styles.pickerButton}
+              onPress={() => {
+                setSelectedAvailability('Nil');
+                setIsAvailabilityModalVisible(false);
+              }}
+            >
+              <Text style={styles.pickerButtonText}>Nil</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.pickerButton}
+              onPress={() => {
+                setSelectedAvailability('Out of Stock');
+                setIsAvailabilityModalVisible(false);
+              }}
+            >
+              <Text style={styles.pickerButtonText}>Out of Stock</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </Modal>
     </ScrollView>
@@ -442,8 +482,16 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
   modalContainer: {
+    flex: 1,
     justifyContent: 'flex-end',
-    margin: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalBackdrop: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
   pickerModalContent: {
     backgroundColor: '#ffffff',

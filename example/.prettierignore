@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+android/build/
+ios/build/
+ios/Pods/
+
+# React Native bundle
+*.bundle.js
+
+# Metro cache
+.metro/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Logs
+*.log
+

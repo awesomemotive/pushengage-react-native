@@ -1,23 +1,21 @@
 package com.pushengagereactnative
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
-import android.util.Log
-import androidx.core.content.ContextCompat
+import android.os.Handler
+import android.os.Looper
+import androidx.activity.ComponentActivity
 import com.facebook.react.bridge.ActivityEventListener
 import com.facebook.react.bridge.Arguments
-import com.facebook.react.bridge.CxxCallbackImpl
+import com.facebook.react.bridge.Callback
+import com.pushengagereactnative.NativePushengageReactNativeSpec
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.module.annotations.ReactModule
-import com.facebook.react.modules.core.PermissionAwareActivity
-import com.facebook.react.modules.core.PermissionListener
+import com.pushengage.pushengage.Callbacks.PushEngagePermissionCallback
 import com.pushengage.pushengage.Callbacks.PushEngageResponseCallback
 import com.pushengage.pushengage.PushEngage
 import com.pushengage.pushengage.helper.PEConstants
@@ -26,24 +24,18 @@ import com.pushengage.pushengage.model.request.AddDynamicSegmentRequest
 import com.pushengage.pushengage.model.request.Goal
 import com.pushengage.pushengage.model.request.TriggerAlert
 import com.pushengage.pushengage.model.request.TriggerCampaign
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Locale
-import org.json.JSONObject
+
 
 @ReactModule(name = PushengageReactNativeModule.NAME)
 class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
-        NativePushengageReactNativeSpec(reactContext), ActivityEventListener, PermissionListener {
-
-  private var permissionResult: Promise? = null
+        NativePushengageReactNativeSpec(reactContext), ActivityEventListener {
 
   init {
     reactContext.addActivityEventListener(this)
   }
-
-  override fun setEventEmitterCallback(eventEmitterCallback: CxxCallbackImpl) {
-    super.mEventEmitterCallback = eventEmitterCallback
-  }
-
 
   override fun getName(): String {
     return NAME
@@ -55,7 +47,7 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
   }
 
   override fun getSdkVersion(): String {
-    return "0.0.1"
+    return "0.0.3"
   }
 
   override fun setSmallIconResource(resourceName: String?, promise: Promise?) {
@@ -116,7 +108,15 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
     val goal =
             Goal(
                     name = goal?.getString("name") ?: "",
-                    count = goal?.getInt("count"),
+                    count = if (goal?.hasKey("count") == true && !goal.isNull("count")) {
+                              try {
+                                goal.getInt("count")
+                              } catch (e: Exception) {
+                                null
+                              }
+                            } else {
+                              null
+                            },
                     value = if (goal?.hasKey("value") == true && !goal.isNull("value")) {
                               try {
                                 goal.getDouble("value")
@@ -208,44 +208,148 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
 
   override fun getSubscriberDetails(values: ReadableArray?, promise: Promise?) {
     val subscriberAttributes = values?.toArrayList()?.map { it.toString() }
-    PushEngage.getSubscriberDetails(
-            subscriberAttributes,
-            object : PushEngageResponseCallback {
-              override fun onSuccess(responseObject: Any?) {
-                try {
-                  when (responseObject) {
-                    null -> promise?.resolve(null)
-                    is Map<*, *> -> promise?.resolve(convertMapToWritable(responseObject))
-                    else -> promise?.resolve(null)
-                  }
-                } catch (e: Exception) {
-                  promise?.reject("ERROR", "Failed to convert response", e)
-                }
-              }
 
-              override fun onFailure(errorCode: Int, errorMessage: String) {
-                promise?.reject(errorCode.toString(), errorMessage)
-              }
-            }
-    )
+    // First check subscription status
+    PushEngage.getSubscriptionStatus(object : PushEngageResponseCallback {
+      override fun onSuccess(result: Any?) {
+        val isSubscribed = result as? Boolean ?: false
+        if (isSubscribed) {
+          // User is subscribed, proceed with getting subscriber details
+          PushEngage.getSubscriberDetails(
+                  subscriberAttributes,
+                  object : PushEngageResponseCallback {
+                    override fun onSuccess(responseObject: Any?) {
+                      try {
+                        when (responseObject) {
+                          null -> promise?.resolve(null)
+                          is Map<*, *> -> promise?.resolve(convertMapToWritable(responseObject))
+                          else -> promise?.resolve(null)
+                        }
+                      } catch (e: Exception) {
+                        promise?.reject("ERROR", "Failed to convert response", e)
+                      }
+                    }
+
+                    override fun onFailure(errorCode: Int, errorMessage: String) {
+                      promise?.reject(errorCode.toString(), errorMessage)
+                    }
+                  }
+          )
+        } else {
+          promise?.reject("FAILURE", "Failed retrieving subscriber details")
+        }
+      }
+
+      override fun onFailure(errorCode: Int?, errorMessage: String?) {
+        promise?.reject("FAILURE", "Failed retrieving subscriber details")
+      }
+    })
   }
 
   override fun requestNotificationPermission(promise: Promise?) {
-    val activity = currentActivity as PermissionAwareActivity? ?: return
+    val activity = currentActivity
 
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-      if (ContextCompat.checkSelfPermission(
-                      reactApplicationContext,
-                      Manifest.permission.POST_NOTIFICATIONS
-              ) != PackageManager.PERMISSION_GRANTED
-      ) {
-        permissionResult = promise
-        activity.requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 100, this)
-      } else {
-        promise?.resolve(true)
+    if (activity == null) {
+      promise?.reject("ACTIVITY_NOT_AVAILABLE", "Activity not available")
+      return
+    }
+
+    // Ensure we're on the main thread
+    Handler(Looper.getMainLooper()).post {
+      try {
+        PushEngage.requestNotificationPermission(activity as ComponentActivity,
+          object : PushEngagePermissionCallback {
+            override fun onPermissionResult(granted: Boolean, error: Error?) {
+              if (error != null) {
+                promise?.reject("PERMISSION_ERROR", error.message, error)
+              } else {
+                promise?.resolve(granted)
+              }
+            }
+          }
+        )
+      } catch (e: Exception) {
+        promise?.reject("PERMISSION_REQUEST_FAILED", "Failed to request permission: ${e.message}", e)
       }
-    } else {
-      promise?.resolve(true)
+    }
+  }
+
+  override fun getNotificationPermissionStatus(): String {
+    return PushEngage.getNotificationPermissionStatus()
+  }
+
+  override fun getSubscriptionStatus(promise: Promise?) {
+    PushEngage.getSubscriptionStatus(object : PushEngageResponseCallback {
+      override fun onSuccess(result: Any?) {
+        val isSubscribed = result as? Boolean ?: false
+        promise?.resolve(isSubscribed)
+      }
+
+      override fun onFailure(errorCode: Int?, errorMessage: String?) {
+        promise?.reject(errorCode?.toString() ?: "SUBSCRIPTION_STATUS_ERROR", errorMessage ?: "Failed to get subscription status")
+      }
+    })
+  }
+
+  override fun getSubscriptionNotificationStatus(promise: Promise?) {
+    PushEngage.getSubscriptionNotificationStatus(object : PushEngageResponseCallback {
+      override fun onSuccess(result: Any?) {
+        val canReceiveNotifications = result as? Boolean ?: false
+        promise?.resolve(canReceiveNotifications)
+      }
+
+      override fun onFailure(errorCode: Int?, errorMessage: String?) {
+        promise?.reject(errorCode?.toString() ?: "SUBSCRIPTION_NOTIFICATION_STATUS_ERROR", errorMessage ?: "Failed to get subscription notification status")
+      }
+    })
+  }
+
+  override fun getSubscriberId(promise: Promise?) {
+    PushEngage.getSubscriberId(object : PushEngageResponseCallback {
+      override fun onSuccess(result: Any?) {
+        val subscriberId = result as? String
+        promise?.resolve(subscriberId)
+      }
+
+      override fun onFailure(errorCode: Int?, errorMessage: String?) {
+        promise?.reject(errorCode?.toString() ?: "SUBSCRIBER_ID_ERROR", errorMessage ?: "Failed to get subscriber ID")
+      }
+    })
+  }
+
+  override fun unsubscribe(promise: Promise?) {
+    PushEngage.unsubscribe(object : PushEngageResponseCallback {
+      override fun onSuccess(result: Any?) {
+        promise?.resolve(null)
+      }
+
+      override fun onFailure(errorCode: Int?, errorMessage: String?) {
+        promise?.reject(errorCode?.toString() ?: "UNSUBSCRIBE_ERROR", errorMessage ?: "Failed to unsubscribe")
+      }
+    })
+  }
+
+  override fun subscribe(promise: Promise?) {
+    val activity = currentActivity
+    if (activity == null) {
+      promise?.reject("ACTIVITY_NOT_AVAILABLE", "Activity not available")
+      return
+    }
+
+    Handler(Looper.getMainLooper()).post {
+      try {
+        PushEngage.subscribe(activity as ComponentActivity, object : PushEngageResponseCallback {
+          override fun onSuccess(result: Any?) {
+            promise?.resolve(null)
+          }
+
+          override fun onFailure(errorCode: Int?, errorMessage: String?) {
+            promise?.reject(errorCode?.toString() ?: "SUBSCRIBE_ERROR", errorMessage ?: "Failed to subscribe")
+          }
+        })
+      } catch (e: Exception) {
+        promise?.reject("SUBSCRIBE_EXCEPTION", "Failed to subscribe: ${e.message}", e)
+      }
     }
   }
 
@@ -412,10 +516,10 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
     }
   }
 
-  override fun onActivityResult(p0: Activity?, p1: Int, p2: Int, p3: Intent?) {}
+  override fun onActivityResult(activity: Activity, requestCode: Int, resultCode: Int, data: Intent?) {}
 
-  override fun onNewIntent(p0: Intent?) {
-    p0?.let { handleIntent(it) }
+  override fun onNewIntent(intent: Intent) {
+    handleIntent(intent)
   }
 
   private fun handleIntent(intent: Intent) {
@@ -454,22 +558,5 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
 
   companion object {
     const val NAME = "PushengageReactNative"
-  }
-
-  override fun onRequestPermissionsResult(
-          requestCode: Int,
-          permissions: Array<String>,
-          grantResults: IntArray
-  ): Boolean {
-    when (requestCode) {
-      100 -> { // The request code used in requestPermissions
-        val isGranted =
-                grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
-        permissionResult?.resolve(isGranted)
-        PushEngage.subscribe()
-        return true
-      }
-    }
-    return false
   }
 }

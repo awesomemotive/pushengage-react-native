@@ -1,0 +1,51 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+lib/
+build/
+dist/
+*.tgz
+
+# Generated files
+android/generated/
+ios/generated/
+android/build/
+ios/build/
+
+# Coverage
+coverage/
+
+# Logs
+*.log
+yarn-error.log
+npm-debug.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+
+# React Native specific
+.expo/
+.turbo/
+
+# Example app specific
+example/android/app/build/
+example/ios/build/
+example/node_modules/
+example/ios/Pods/
+
+# Package files
+*.tgz
+
+# Documentation (if auto-generated)
+docs/api/
+

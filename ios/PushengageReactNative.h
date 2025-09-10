@@ -1,6 +1,7 @@
 
-#import "generated/RNPushengageReactNativeSpec/RNPushengageReactNativeSpec.h"
+#import "RNPushengageReactNativeSpec.h"
 
-@interface PushengageReactNative : NativePushengageReactNativeSpecBase <NativePushengageReactNativeSpec>
+@interface PushengageReactNative
+    : NativePushengageReactNativeSpecBase <NativePushengageReactNativeSpec>
 
 @end

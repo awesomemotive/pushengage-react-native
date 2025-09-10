@@ -1,4 +1,4 @@
-package pushengagereactnative.example
+package com.pushengagereactnative.example
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

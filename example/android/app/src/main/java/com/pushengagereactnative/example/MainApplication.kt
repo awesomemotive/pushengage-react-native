@@ -1,6 +1,7 @@
-package pushengagereactnative.example
+package com.pushengagereactnative.example
 
 import android.app.Application
+import com.pushengagereactnative.example.BuildConfig
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactHost

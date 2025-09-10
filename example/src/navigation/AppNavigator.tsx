@@ -1,11 +1,10 @@
-import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AlertEntryScreen from '../AlertEntryScreen';
 import PushEngageScreen from '../App';
 import SendGoalScreen from '../SendGoalScreen';
-import TriggerCampaignsScreen from '../TriggerCampaignsScreen';
 import TriggerCampaignEntry from '../TriggerCampaignEntry';
-import AlertEntryScreen from '../AlertEntryScreen';
+import TriggerCampaignsScreen from '../TriggerCampaignsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,24 +23,24 @@ export default function AppNavigator() {
           headerBackTitleVisible: false,
         }}
       >
-        <Stack.Screen name="PushEngage" component={PushEngageScreen} />
-        <Stack.Screen name="SendGoal" component={SendGoalScreen} />
-        <Stack.Screen 
-          name="TriggerCampaigns" 
+        <Stack.Screen name='PushEngage' component={PushEngageScreen} />
+        <Stack.Screen name='SendGoal' component={SendGoalScreen} />
+        <Stack.Screen
+          name='TriggerCampaigns'
           component={TriggerCampaignsScreen}
           options={{ title: 'Trigger Campaigns' }}
         />
-        <Stack.Screen 
-          name="TriggerCampaignEntry" 
+        <Stack.Screen
+          name='TriggerCampaignEntry'
           component={TriggerCampaignEntry}
           options={{ title: 'Trigger Campaign' }}
         />
-        <Stack.Screen 
-          name="AlertEntry" 
+        <Stack.Screen
+          name='AlertEntry'
           component={AlertEntryScreen}
           options={{ title: 'Alert Entry' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
   );
-} 
+}
