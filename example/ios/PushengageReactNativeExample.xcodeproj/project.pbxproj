@@ -299,38 +299,7 @@
 				1D294D672D156CBA002652C6 /* Embed Foundation Extensions */,
 				C0B736B98A4B44EA1C55A481 /* [CP] Embed Pods Frameworks */,
 				62619924496B09B36874F69D /* [CP] Copy Pods Resources */,
-				50329A1B11C7D5BA2C548619 /* Copy Hermes dSYM to Archive */,
-				AFCE0BEA485427FD97CB7FE8 /* Copy Hermes dSYM to Archive */,
-				FD2BBA235FF0B6A48EB240F9 /* Copy Hermes dSYM to Archive */,
-				9B7396C287E21379CAFB7C67 /* Copy Hermes dSYM to Archive */,
-				AD67B31E65413DDC73343882 /* Copy Hermes dSYM to Archive */,
-				4731EAD9DE3F792D5CCEE850 /* Copy Hermes dSYM to Archive */,
-				5DFC7E188A553D71F88822E7 /* Copy Hermes dSYM to Archive */,
-				979EDA72D326ECFBA5F55D24 /* Copy Hermes dSYM to Archive */,
-				5FB330D67DB4857B3211ED5F /* Copy Hermes dSYM to Archive */,
-				11D373B10012EF3DDC796710 /* Copy Hermes dSYM to Archive */,
-				33DB280F25D2F6842FC08CB8 /* Copy Hermes dSYM to Archive */,
-				E8D5A290D642B9363FE6B2E0 /* Copy Hermes dSYM to Archive */,
-				E4147DAD12D5923551B003BA /* Copy Hermes dSYM to Archive */,
-				024635610678B3FFAD495E79 /* Copy Hermes dSYM to Archive */,
-				023E7EDC89AFCA5B00F079FB /* Copy Hermes dSYM to Archive */,
-				D185F065BFFB3EB155F242B2 /* Copy Hermes dSYM to Archive */,
-				C2AA29E29E23F6473A1EBC6A /* Copy Hermes dSYM to Archive */,
-				8CF329D4E676D2718FE84849 /* Copy Hermes dSYM to Archive */,
-				54F38E00818FE76B52E76F00 /* Copy Hermes dSYM to Archive */,
-				DC5A149BD9178F3FBF3DB14A /* Copy Hermes dSYM to Archive */,
-				C6C3850C0049093680E1ED2D /* Copy Hermes dSYM to Archive */,
-				25B1110CFDD39D3492A6FAFF /* Copy Hermes dSYM to Archive */,
-				E5FDE8B7A82487DE4F62927A /* Copy Hermes dSYM to Archive */,
-				7094412E768611568ABF4C02 /* Copy Hermes dSYM to Archive */,
-				BE261B69DBF51A1533E5E17D /* Copy Hermes dSYM to Archive */,
-				3C73DF6B88F0D957EDF6F054 /* Copy Hermes dSYM to Archive */,
-				5AC408657814E9D421E76EAF /* Copy Hermes dSYM to Archive */,
-				3317112AEB5F1FE220457498 /* Copy Hermes dSYM to Archive */,
-				DE9B9CF663FC6A228C3FE933 /* Copy Hermes dSYM to Archive */,
-				78A3A11263384477E8ADC110 /* Copy Hermes dSYM to Archive */,
-				AADDAFC6F16D259CC5E2A26F /* Copy Hermes dSYM to Archive */,
-				A4209D80CA53CB33FB9A28EC /* Copy Hermes dSYM to Archive */,
+				88F14665E26F1B3CEBFD47B1 /* Copy Hermes dSYM to Archive */,
 			);
 			buildRules = (
 			);
@@ -477,132 +446,6 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		023E7EDC89AFCA5B00F079FB /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		024635610678B3FFAD495E79 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		11D373B10012EF3DDC796710 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		25B1110CFDD39D3492A6FAFF /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		3317112AEB5F1FE220457498 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		33DB280F25D2F6842FC08CB8 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		3C73DF6B88F0D957EDF6F054 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
 		45B7193CD4BF06A41318A1C4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -624,24 +467,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
-		};
-		4731EAD9DE3F792D5CCEE850 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  \n  # Find Hermes dSYM in build products\n  HERMES_DSYM_PATHS=(\n    \"${BUILT_PRODUCTS_DIR}/hermes.framework.dSYM\"\n    \"${TARGET_BUILD_DIR}/hermes.framework.dSYM\"\n    \"${CONFIGURATION_BUILD_DIR}/hermes.framework.dSYM\"\n  )\n  \n  HERMES_DSYM_PATH=\"\"\n  for path in \"${HERMES_DSYM_PATHS[@]}\"; do\n    if [ -d \"$path\" ]; then\n      HERMES_DSYM_PATH=\"$path\"\n      echo \"📍 Found Hermes dSYM at: $path\"\n      break\n    fi\n  done\n  \n  if [ -n \"$HERMES_DSYM_PATH\" ]; then\n    # Ensure the dSYM is copied to the archive\n    ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n    if [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n      echo \"📦 Copying Hermes dSYM to archive...\"\n      cp -R \"$HERMES_DSYM_PATH\" \"$ARCHIVE_DSYM_DIR/\"\n      echo \"✅ Hermes dSYM copied to archive successfully\"\n    else\n      echo \"⚠️  Archive dSYM directory not found\"\n    fi\n  else\n    echo \"⚠️  Hermes dSYM not found in build products\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
 		};
 		4E7F83A1E099097E41613607 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -665,96 +490,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		50329A1B11C7D5BA2C548619 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  \n  # Find Hermes dSYM in build products\n  HERMES_DSYM_PATHS=(\n    \"${BUILT_PRODUCTS_DIR}/hermes.framework.dSYM\"\n    \"${TARGET_BUILD_DIR}/hermes.framework.dSYM\"\n    \"${CONFIGURATION_BUILD_DIR}/hermes.framework.dSYM\"\n  )\n  \n  HERMES_DSYM_PATH=\"\"\n  for path in \"${HERMES_DSYM_PATHS[@]}\"; do\n    if [ -d \"$path\" ]; then\n      HERMES_DSYM_PATH=\"$path\"\n      echo \"📍 Found Hermes dSYM at: $path\"\n      break\n    fi\n  done\n  \n  if [ -n \"$HERMES_DSYM_PATH\" ]; then\n    # Ensure the dSYM is copied to the archive\n    ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n    if [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n      echo \"📦 Copying Hermes dSYM to archive...\"\n      cp -R \"$HERMES_DSYM_PATH\" \"$ARCHIVE_DSYM_DIR/\"\n      echo \"✅ Hermes dSYM copied to archive successfully\"\n    else\n      echo \"⚠️  Archive dSYM directory not found\"\n    fi\n  else\n    echo \"⚠️  Hermes dSYM not found in build products\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		54F38E00818FE76B52E76F00 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		5AC408657814E9D421E76EAF /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		5DFC7E188A553D71F88822E7 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  \n  # Find Hermes dSYM in build products\n  HERMES_DSYM_PATHS=(\n    \"${BUILT_PRODUCTS_DIR}/hermes.framework.dSYM\"\n    \"${TARGET_BUILD_DIR}/hermes.framework.dSYM\"\n    \"${CONFIGURATION_BUILD_DIR}/hermes.framework.dSYM\"\n  )\n  \n  HERMES_DSYM_PATH=\"\"\n  for path in \"${HERMES_DSYM_PATHS[@]}\"; do\n    if [ -d \"$path\" ]; then\n      HERMES_DSYM_PATH=\"$path\"\n      echo \"📍 Found Hermes dSYM at: $path\"\n      break\n    fi\n  done\n  \n  if [ -n \"$HERMES_DSYM_PATH\" ]; then\n    # Ensure the dSYM is copied to the archive\n    ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n    if [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n      echo \"📦 Copying Hermes dSYM to archive...\"\n      cp -R \"$HERMES_DSYM_PATH\" \"$ARCHIVE_DSYM_DIR/\"\n      echo \"✅ Hermes dSYM copied to archive successfully\"\n    else\n      echo \"⚠️  Archive dSYM directory not found\"\n    fi\n  else\n    echo \"⚠️  Hermes dSYM not found in build products\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		5FB330D67DB4857B3211ED5F /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
 		62619924496B09B36874F69D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -771,24 +506,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		7094412E768611568ABF4C02 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
 		};
 		722990DFD3CD6E97066A4CF2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -807,7 +524,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests/Pods-PushengageReactNativeExample-PushengageReactNativeExampleTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		78A3A11263384477E8ADC110 /* Copy Hermes dSYM to Archive */ = {
+		88F14665E26F1B3CEBFD47B1 /* Copy Hermes dSYM to Archive */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -824,132 +541,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		8CF329D4E676D2718FE84849 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		979EDA72D326ECFBA5F55D24 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  \n  # Find Hermes dSYM in build products\n  HERMES_DSYM_PATHS=(\n    \"${BUILT_PRODUCTS_DIR}/hermes.framework.dSYM\"\n    \"${TARGET_BUILD_DIR}/hermes.framework.dSYM\"\n    \"${CONFIGURATION_BUILD_DIR}/hermes.framework.dSYM\"\n  )\n  \n  HERMES_DSYM_PATH=\"\"\n  for path in \"${HERMES_DSYM_PATHS[@]}\"; do\n    if [ -d \"$path\" ]; then\n      HERMES_DSYM_PATH=\"$path\"\n      echo \"📍 Found Hermes dSYM at: $path\"\n      break\n    fi\n  done\n  \n  if [ -n \"$HERMES_DSYM_PATH\" ]; then\n    # Ensure the dSYM is copied to the archive\n    ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n    if [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n      echo \"📦 Copying Hermes dSYM to archive...\"\n      cp -R \"$HERMES_DSYM_PATH\" \"$ARCHIVE_DSYM_DIR/\"\n      echo \"✅ Hermes dSYM copied to archive successfully\"\n    else\n      echo \"⚠️  Archive dSYM directory not found\"\n    fi\n  else\n    echo \"⚠️  Hermes dSYM not found in build products\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		9B7396C287E21379CAFB7C67 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  \n  # Find Hermes dSYM in build products\n  HERMES_DSYM_PATHS=(\n    \"${BUILT_PRODUCTS_DIR}/hermes.framework.dSYM\"\n    \"${TARGET_BUILD_DIR}/hermes.framework.dSYM\"\n    \"${CONFIGURATION_BUILD_DIR}/hermes.framework.dSYM\"\n  )\n  \n  HERMES_DSYM_PATH=\"\"\n  for path in \"${HERMES_DSYM_PATHS[@]}\"; do\n    if [ -d \"$path\" ]; then\n      HERMES_DSYM_PATH=\"$path\"\n      echo \"📍 Found Hermes dSYM at: $path\"\n      break\n    fi\n  done\n  \n  if [ -n \"$HERMES_DSYM_PATH\" ]; then\n    # Ensure the dSYM is copied to the archive\n    ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n    if [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n      echo \"📦 Copying Hermes dSYM to archive...\"\n      cp -R \"$HERMES_DSYM_PATH\" \"$ARCHIVE_DSYM_DIR/\"\n      echo \"✅ Hermes dSYM copied to archive successfully\"\n    else\n      echo \"⚠️  Archive dSYM directory not found\"\n    fi\n  else\n    echo \"⚠️  Hermes dSYM not found in build products\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		A4209D80CA53CB33FB9A28EC /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		AADDAFC6F16D259CC5E2A26F /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		AD67B31E65413DDC73343882 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  \n  # Find Hermes dSYM in build products\n  HERMES_DSYM_PATHS=(\n    \"${BUILT_PRODUCTS_DIR}/hermes.framework.dSYM\"\n    \"${TARGET_BUILD_DIR}/hermes.framework.dSYM\"\n    \"${CONFIGURATION_BUILD_DIR}/hermes.framework.dSYM\"\n  )\n  \n  HERMES_DSYM_PATH=\"\"\n  for path in \"${HERMES_DSYM_PATHS[@]}\"; do\n    if [ -d \"$path\" ]; then\n      HERMES_DSYM_PATH=\"$path\"\n      echo \"📍 Found Hermes dSYM at: $path\"\n      break\n    fi\n  done\n  \n  if [ -n \"$HERMES_DSYM_PATH\" ]; then\n    # Ensure the dSYM is copied to the archive\n    ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n    if [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n      echo \"📦 Copying Hermes dSYM to archive...\"\n      cp -R \"$HERMES_DSYM_PATH\" \"$ARCHIVE_DSYM_DIR/\"\n      echo \"✅ Hermes dSYM copied to archive successfully\"\n    else\n      echo \"⚠️  Archive dSYM directory not found\"\n    fi\n  else\n    echo \"⚠️  Hermes dSYM not found in build products\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		AFCE0BEA485427FD97CB7FE8 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  \n  # Find Hermes dSYM in build products\n  HERMES_DSYM_PATHS=(\n    \"${BUILT_PRODUCTS_DIR}/hermes.framework.dSYM\"\n    \"${TARGET_BUILD_DIR}/hermes.framework.dSYM\"\n    \"${CONFIGURATION_BUILD_DIR}/hermes.framework.dSYM\"\n  )\n  \n  HERMES_DSYM_PATH=\"\"\n  for path in \"${HERMES_DSYM_PATHS[@]}\"; do\n    if [ -d \"$path\" ]; then\n      HERMES_DSYM_PATH=\"$path\"\n      echo \"📍 Found Hermes dSYM at: $path\"\n      break\n    fi\n  done\n  \n  if [ -n \"$HERMES_DSYM_PATH\" ]; then\n    # Ensure the dSYM is copied to the archive\n    ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n    if [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n      echo \"📦 Copying Hermes dSYM to archive...\"\n      cp -R \"$HERMES_DSYM_PATH\" \"$ARCHIVE_DSYM_DIR/\"\n      echo \"✅ Hermes dSYM copied to archive successfully\"\n    else\n      echo \"⚠️  Archive dSYM directory not found\"\n    fi\n  else\n    echo \"⚠️  Hermes dSYM not found in build products\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
 		};
 		B1E8CF676382C61A90353884 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -990,24 +581,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BE261B69DBF51A1533E5E17D /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
 		C0B736B98A4B44EA1C55A481 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1024,42 +597,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PushengageReactNativeExample/Pods-PushengageReactNativeExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		C2AA29E29E23F6473A1EBC6A /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		C6C3850C0049093680E1ED2D /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
 		};
 		CDBE0AA5822C595D7027673F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1082,132 +619,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
-		};
-		D185F065BFFB3EB155F242B2 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		DC5A149BD9178F3FBF3DB14A /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		DE9B9CF663FC6A228C3FE933 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		E4147DAD12D5923551B003BA /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		E5FDE8B7A82487DE4F62927A /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${DWARF_DSYM_FOLDER_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		E8D5A290D642B9363FE6B2E0 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n  HERMES_BIN=\"${APP_PATH}/Frameworks/hermes.framework/hermes\"\n  ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n  \n  if [ -f \"$HERMES_BIN\" ] && [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n    echo \"📍 Found Hermes binary at: $HERMES_BIN\"\n    mkdir -p \"$ARCHIVE_DSYM_DIR\"\n    echo \"🔧 Generating dSYM into archive with dsymutil...\"\n    dsymutil \"$HERMES_BIN\" -o \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM\" || { echo \"❌ dsymutil failed\"; exit 1; }\n    if [ -f \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" ]; then\n      echo \"✅ Hermes dSYM generated in archive\"\n      if command -v dwarfdump >/dev/null 2>&1; then\n        echo \"🔍 App Hermes UUID(s):\"; dwarfdump --uuid \"$HERMES_BIN\" || true\n        echo \"🔍 dSYM Hermes UUID(s):\"; dwarfdump --uuid \"$ARCHIVE_DSYM_DIR/hermes.framework.dSYM/Contents/Resources/DWARF/hermes\" || true\n      fi\n    else\n      echo \"❌ Failed to generate Hermes dSYM in archive\"\n    fi\n  else\n    echo \"⚠️  Hermes binary not found inside app or archive dSYM dir missing\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
-		};
-		FD2BBA235FF0B6A48EB240F9 /* Copy Hermes dSYM to Archive */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Hermes dSYM to Archive";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "set -e\n\n# Only run during archive builds\nif [ \"$ACTION\" = \"install\" ] && [ \"$CONFIGURATION\" = \"Release\" ]; then\n  echo \"🔄 Ensuring Hermes dSYM is included in archive...\"\n  \n  # Find Hermes dSYM in build products\n  HERMES_DSYM_PATHS=(\n    \"${BUILT_PRODUCTS_DIR}/hermes.framework.dSYM\"\n    \"${TARGET_BUILD_DIR}/hermes.framework.dSYM\"\n    \"${CONFIGURATION_BUILD_DIR}/hermes.framework.dSYM\"\n  )\n  \n  HERMES_DSYM_PATH=\"\"\n  for path in \"${HERMES_DSYM_PATHS[@]}\"; do\n    if [ -d \"$path\" ]; then\n      HERMES_DSYM_PATH=\"$path\"\n      echo \"📍 Found Hermes dSYM at: $path\"\n      break\n    fi\n  done\n  \n  if [ -n \"$HERMES_DSYM_PATH\" ]; then\n    # Ensure the dSYM is copied to the archive\n    ARCHIVE_DSYM_DIR=\"${ARCHIVE_DSYMS_PATH}\"\n    if [ -n \"$ARCHIVE_DSYM_DIR\" ]; then\n      echo \"📦 Copying Hermes dSYM to archive...\"\n      cp -R \"$HERMES_DSYM_PATH\" \"$ARCHIVE_DSYM_DIR/\"\n      echo \"✅ Hermes dSYM copied to archive successfully\"\n    else\n      echo \"⚠️  Archive dSYM directory not found\"\n    fi\n  else\n    echo \"⚠️  Hermes dSYM not found in build products\"\n  fi\nelse\n  echo \"ℹ️  Skipping dSYM archive copy (not an archive build)\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1349,7 +760,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.3;
+				MARKETING_VERSION = 0.1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1380,7 +791,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.3;
+				MARKETING_VERSION = 0.1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1422,7 +833,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 0.0.3;
+				MARKETING_VERSION = 0.1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = pushengagereactnative.example.NotificationServiceExtensionSwift;
@@ -1466,7 +877,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 0.0.3;
+				MARKETING_VERSION = 0.1.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = pushengagereactnative.example.NotificationServiceExtensionSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1506,7 +917,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 0.0.3;
+				MARKETING_VERSION = 0.1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = pushengagereactnative.example.NotificationContentExtension;
@@ -1549,7 +960,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 0.0.3;
+				MARKETING_VERSION = 0.1.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = pushengagereactnative.example.NotificationContentExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -2,6 +2,7 @@ import PushengageReactNative from './NativePushengageReactNative';
 
 const {
   setAppId,
+  setEnvironment: nativeSetEnvironment,
   getSdkVersion,
   setSmallIconResource,
   getDeviceTokenHash,
@@ -12,6 +13,7 @@ const {
   addAlert,
   getSubscriberDetails,
   requestNotificationPermission,
+  getInitialNotification,
   getNotificationPermissionStatus,
   getSubscriptionStatus,
   getSubscriptionNotificationStatus,
@@ -26,11 +28,109 @@ const {
   deleteSubscriberAttributes,
   addProfileId,
   setSubscriberAttributes,
+  setBadgeCount,
+  identify: nativeIdentify,
+  logout: nativeLogout,
+  trackEvent: nativeTrackEvent,
+  runConfigValidation,
+  setFcmConfigErrorListenerEnabled,
   onValueChanged,
+  onFcmConfigError,
 } = PushengageReactNative;
+
+// Side effect: install the native FCM-config-error forwarder once per module
+// load so JS consumers can subscribe to onFcmConfigError without an explicit
+// activation step. iOS-side implementation is a no-op.
+setFcmConfigErrorListenerEnabled(true);
+
+export type Environment = 'STAGING' | 'PRODUCTION';
+
+// Shape must match the EventEmitter / Promise return in
+// NativePushengageReactNative.ts — update both when adding fields.
+export interface InitialNotification {
+  deepLink: string;
+  data: { [key: string]: string };
+}
+
+// Shape must match the EventEmitter in NativePushengageReactNative.ts —
+// update both when adding fields.
+export interface FcmConfigError {
+  code: number;
+  message: string;
+}
+
+const setEnvironment = (environment: Environment): void =>
+  nativeSetEnvironment(environment);
+
+export interface IdentifyFields {
+  first_name?: string | number | boolean;
+  last_name?: string | number | boolean;
+  email?: string | number | boolean;
+  phone?: string | number | boolean;
+  gender?: string | number | boolean;
+  dob?: string | number | boolean;
+  language?: string | number | boolean;
+  profile_id?: string | number | boolean;
+  country?: string | number | boolean;
+  city?: string | number | boolean;
+  state?: string | number | boolean;
+  zip?: string | number | boolean;
+}
+
+const identify = (fields: IdentifyFields): Promise<void> => {
+  const payload: { [key: string]: string | number | boolean } = {};
+  if (fields.first_name !== undefined) payload.first_name = fields.first_name;
+  if (fields.last_name !== undefined) payload.last_name = fields.last_name;
+  if (fields.email !== undefined) payload.email = fields.email;
+  if (fields.phone !== undefined) payload.phone = fields.phone;
+  if (fields.gender !== undefined) payload.gender = fields.gender;
+  if (fields.dob !== undefined) payload.dob = fields.dob;
+  if (fields.language !== undefined) payload.language = fields.language;
+  if (fields.profile_id !== undefined) payload.profile_id = fields.profile_id;
+  if (fields.country !== undefined) payload.country = fields.country;
+  if (fields.city !== undefined) payload.city = fields.city;
+  if (fields.state !== undefined) payload.state = fields.state;
+  if (fields.zip !== undefined) payload.zip = fields.zip;
+  return nativeIdentify(payload);
+};
+
+export interface TrackEventPayload {
+  eventName: string;
+  data?: { [key: string]: string | number | boolean };
+  profileId?: string;
+  provider?: string;
+  eventType?: string;
+}
+
+const trackEvent = (event: TrackEventPayload): Promise<void> => {
+  const payload: {
+    [key: string]:
+      | string
+      | { [key: string]: string | number | boolean }
+      | undefined;
+  } = { eventName: event.eventName };
+  if (event.data !== undefined) payload.data = event.data;
+  if (event.profileId !== undefined) payload.profileId = event.profileId;
+  if (event.provider !== undefined) payload.provider = event.provider;
+  if (event.eventType !== undefined) payload.eventType = event.eventType;
+  return nativeTrackEvent(payload);
+};
+
+const logout = (fieldNames: string[] | null): Promise<void> => {
+  if (
+    Array.isArray(fieldNames) &&
+    fieldNames.some(x => typeof x !== 'string')
+  ) {
+    return Promise.reject(
+      new TypeError('logout: fieldNames must be an array of strings or null')
+    );
+  }
+  return nativeLogout(fieldNames);
+};
 
 const PushEngage = {
   setAppId,
+  setEnvironment,
   getSdkVersion,
   setSmallIconResource,
   getDeviceTokenHash,
@@ -41,6 +141,7 @@ const PushEngage = {
   addAlert,
   getSubscriberDetails,
   requestNotificationPermission,
+  getInitialNotification,
   getNotificationPermissionStatus,
   getSubscriptionStatus,
   getSubscriptionNotificationStatus,
@@ -55,7 +156,13 @@ const PushEngage = {
   deleteSubscriberAttributes,
   addProfileId,
   setSubscriberAttributes,
+  setBadgeCount,
+  identify,
+  logout,
+  trackEvent,
+  runConfigValidation,
   onValueChanged,
+  onFcmConfigError,
 };
 
 export default PushEngage;

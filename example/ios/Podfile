@@ -19,6 +19,12 @@ end
 # Disable prebuilt React Native dependencies to avoid xcframework linkage issues
 ENV['RCT_USE_RN_DEP'] = '0'
 
+# PushEngage iOS SDK 1.0.0 (published pods).
+# 1.0.0 splits the SDK into two pods: 'PushEngage' (app target, resolved
+# transitively via pushengage-react-native.podspec's `s.dependency
+# 'PushEngage', '1.0.0'`) and 'PushEngageExtension' (extension-safe core,
+# linked explicitly by the extension targets below).
+
 target 'PushengageReactNativeExample' do
   config = use_native_modules!
 
@@ -28,6 +34,18 @@ target 'PushengageReactNativeExample' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  # PushEngage (app target) resolves transitively from
+  # pushengage-react-native.podspec's `s.dependency 'PushEngage', '1.0.0'`,
+  # so no explicit declaration is needed here.
+
+  # Opt into the bridge's unit-test target. Autolinking via use_native_modules!
+  # doesn't pass :testspecs through; this explicit declaration adds it. After
+  # pod-install you can run the suite with:
+  #   xcodebuild test -scheme pushengage-react-native-Unit-Tests \
+  #     -workspace PushengageReactNativeExample.xcworkspace \
+  #     -destination 'platform=iOS Simulator,name=iPhone 16'
+  pod 'pushengage-react-native', :path => '../..', :testspecs => ['Tests']
+
   target 'PushengageReactNativeExampleTests' do
     inherit! :complete
     # Pods for testing
@@ -35,7 +53,13 @@ target 'PushengageReactNativeExample' do
 
 
   pre_install do |installer|
-    system("cd ../../ && npx bob build --target codegen")
+    unless system("cd ../../ && npx bob build --target codegen")
+      raise "bob codegen failed; aborting pod install. " \
+            "Check that node_modules is installed (yarn install) and that " \
+            "react-native-builder-bob >= 0.40.6 is resolved (the version " \
+            "that passes --source library so RN doesn't emit app-level " \
+            "provider files into a library package)."
+    end
   end
 
   post_install do |installer|
@@ -50,25 +74,25 @@ target 'PushengageReactNativeExample' do
     
       installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
-          # Special handling only for PushEngage SDK in app extensions
-          if target.name.include?('PushEngage')
-            config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'No'
-            config.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
+          # Xcode 26 dropped libswiftCompatibility56.a from its toolchain, so
+          # any pod with deployment_target < iOS 16 fails to link (Swift 5.7
+          # runtime ships natively in iOS 16; below that the back-deploy lib
+          # is required and now missing). The native PushEngage podspecs are
+          # still pinned to iOS 12; we bump only the Swift pods (and the test
+          # targets that link them) to the empirical minimum that builds on
+          # Xcode 26. 16.0 is the floor — going lower reintroduces the
+          # missing-lib link error; going higher is unnecessary churn.
+          # Xcode ≤ 25 still ships the compat libs, so the override is
+          # effectively a no-op there.
+          if ['PushEngage', 'PushEngageExtension', 'pushengage-react-native', 'pushengage-react-native-Unit-Tests', 'AppHost-pushengage-react-native-Unit-Tests'].include?(target.name)
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '16.0'
           end
 
-          # Fix duplicate symbols by excluding codegen files from pushengage-react-native
-          if target.name == 'pushengage-react-native'
-            target.source_build_phase.files.to_a.each do |build_file|
-              if build_file.file_ref.path.include?('generated/') || 
-                 build_file.file_ref.path.include?('RCTAppDependencyProvider') ||
-                 build_file.file_ref.path.include?('RCTModuleProviders') ||
-                 build_file.file_ref.path.include?('RCTThirdPartyComponentsProvider') ||
-                 build_file.file_ref.path.include?('RCTUnstableModulesRequiringMainQueueSetupProvider') ||
-                 build_file.file_ref.path.include?('RCTModulesConformingToProtocolsProvider')
-                target.source_build_phase.remove_file_reference(build_file.file_ref)
-              end
-            end
-          end
+          # NOTE: the 0.1.0-era APPLICATION_EXTENSION_API_ONLY=NO diagnostic
+          # override is gone: SDK 1.0.0 removed that conditional-compilation
+          # mechanism entirely by splitting app-only code into the 'PushEngage'
+          # pod (app target only) and extension-safe code into
+          # 'PushEngageExtension', so no build-setting override is needed.
         end
       end
       # Persist glog module fix so future pod installs don't reintroduce the issue
@@ -91,7 +115,9 @@ target 'PushengageReactNativeExample' do
         installer.aggregate_targets.each do |aggregate_target|
           aggregate_target.user_project.targets.each do |target|
             if target.name == 'PushengageReactNativeExample'
-              build_phase = target.new_shell_script_build_phase('Copy Hermes dSYM to Archive')
+              phase_name = 'Copy Hermes dSYM to Archive'
+              build_phase = target.shell_script_build_phases.find { |p| p.name == phase_name } ||
+                            target.new_shell_script_build_phase(phase_name)
               build_phase.shell_script = <<~SCRIPT
                 set -e
                 
@@ -131,10 +157,12 @@ target 'PushengageReactNativeExample' do
   end
 end
 
+# Per the 1.0.0 migration, extension targets link only the extension-safe
+# 'PushEngageExtension' pod (not the full app-side 'PushEngage' pod).
 target 'NotificationServiceExtension' do
-  pod 'PushEngage', '0.0.6'
+  pod 'PushEngageExtension', '1.0.0'
 end
 
 target 'NotificationContentExtension' do
-  pod 'PushEngage', '0.0.6'
+  pod 'PushEngageExtension', '1.0.0'
 end

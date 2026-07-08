@@ -1,8 +1,12 @@
 import { AppRegistry } from 'react-native';
-import AppNavigator from './src/navigation/AppNavigator';
 import { name as appName } from './app.json';
 import PushEngage from '@pushengage/pushengage-react-native';
+import AppBootstrap from './src/AppBootstrap';
 
-PushEngage.setAppId('YOUR_APP_ID');
+// Logging is safe to enable synchronously; the SDK keeps the flag in a
+// process-wide constant and does not require an app id.
 PushEngage.enableLogging(true);
-AppRegistry.registerComponent(appName, () => AppNavigator);
+
+// setAppId is intentionally NOT called here. AppBootstrap reads the persisted
+// app id from DemoPrefs and calls setAppId before rendering the navigator.
+AppRegistry.registerComponent(appName, () => AppBootstrap);

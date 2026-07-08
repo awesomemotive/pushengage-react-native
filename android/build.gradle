@@ -105,6 +105,7 @@ android {
 repositories {
   mavenCentral()
   google()
+  maven { url 'https://www.jitpack.io' }
 }
 
 def kotlin_version = getExtOrDefault("kotlinVersion")
@@ -115,7 +116,11 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'com.github.awesomemotive:pushengage-android-sdk:0.0.6'
+  implementation 'com.github.awesomemotive:pushengage-android-sdk:0.1.0'
+
+  // Unit tests for the bridge's pure-Kotlin helpers (Mappers, constants).
+  // Run via: gradle -p android :test
+  testImplementation 'junit:junit:4.13.2'
 }
 
 if (isNewArchitectureEnabled()) {
