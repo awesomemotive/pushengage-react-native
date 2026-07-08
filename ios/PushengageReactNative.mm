@@ -78,6 +78,10 @@ RCT_EXPORT_MODULE()
   [pushengageModule enableLogging:shouldEnable];
 }
 
+- (void)setBadgeCount:(double)count {
+  [pushengageModule setBadgeCount:count];
+}
+
 - (void)getDeviceTokenHash:(RCTPromiseResolveBlock)resolve
                     reject:(RCTPromiseRejectBlock)reject {
   [pushengageModule getDeviceTokenHashWithResolve:resolve reject:reject];
@@ -112,6 +116,11 @@ RCT_EXPORT_MODULE()
 
 - (NSString *)getNotificationPermissionStatus {
   return [pushengageModule getNotificationPermissionStatus];
+}
+
+- (void)getInitialNotification:(RCTPromiseResolveBlock)resolve
+                        reject:(RCTPromiseRejectBlock)reject {
+  [pushengageModule getInitialNotificationWithResolve:resolve reject:reject];
 }
 
 - (void)getSubscriptionStatus:(RCTPromiseResolveBlock)resolve
@@ -156,6 +165,10 @@ RCT_EXPORT_MODULE()
   [pushengageModule setAppId:appId];
 }
 
+- (void)setEnvironment:(NSString *)environment {
+  [pushengageModule setEnvironment:environment];
+}
+
 - (void)setSmallIconResource:(NSString *)resourceName
                      resolve:(RCTPromiseResolveBlock)resolve
                       reject:(RCTPromiseRejectBlock)reject {
@@ -170,6 +183,38 @@ RCT_EXPORT_MODULE()
   [pushengageModule setSubscriberAttributes:attributes
                                     resolve:resolve
                                      reject:reject];
+}
+
+- (void)identify:(NSDictionary *)fields
+         resolve:(RCTPromiseResolveBlock)resolve
+          reject:(RCTPromiseRejectBlock)reject {
+  [pushengageModule identify:fields resolve:resolve reject:reject];
+}
+
+- (void)logout:(NSArray *_Nullable)fieldNames
+       resolve:(RCTPromiseResolveBlock)resolve
+        reject:(RCTPromiseRejectBlock)reject {
+  [pushengageModule logout:fieldNames resolve:resolve reject:reject];
+}
+
+- (void)trackEvent:(NSDictionary *)event
+           resolve:(RCTPromiseResolveBlock)resolve
+            reject:(RCTPromiseRejectBlock)reject {
+  [pushengageModule trackEvent:event resolve:resolve reject:reject];
+}
+
+- (void)runConfigValidation:(NSString *)senderId
+                  projectId:(NSString *)projectId
+                    resolve:(RCTPromiseResolveBlock)resolve
+                     reject:(RCTPromiseRejectBlock)reject {
+  [pushengageModule runConfigValidation:senderId
+                              projectId:projectId
+                                resolve:resolve
+                                 reject:reject];
+}
+
+- (void)setFcmConfigErrorListenerEnabled:(BOOL)enabled {
+  [pushengageModule setFcmConfigErrorListenerEnabled:enabled];
 }
 
 @end

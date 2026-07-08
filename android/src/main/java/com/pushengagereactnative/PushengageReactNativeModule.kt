@@ -15,6 +15,7 @@ import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.WritableMap
 import com.facebook.react.module.annotations.ReactModule
+import com.pushengage.pushengage.Callbacks.FcmConfigErrorListener
 import com.pushengage.pushengage.Callbacks.PushEngagePermissionCallback
 import com.pushengage.pushengage.Callbacks.PushEngageResponseCallback
 import com.pushengage.pushengage.PushEngage
@@ -22,6 +23,7 @@ import com.pushengage.pushengage.helper.PEConstants
 import com.pushengage.pushengage.helper.PEPrefs
 import com.pushengage.pushengage.model.request.AddDynamicSegmentRequest
 import com.pushengage.pushengage.model.request.Goal
+import com.pushengage.pushengage.model.request.TrackEvent
 import com.pushengage.pushengage.model.request.TriggerAlert
 import com.pushengage.pushengage.model.request.TriggerCampaign
 import org.json.JSONObject
@@ -37,17 +39,48 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
     reactContext.addActivityEventListener(this)
   }
 
+  override fun setFcmConfigErrorListenerEnabled(enabled: Boolean) {
+    if (enabled) {
+      PushEngage.setFcmConfigErrorListener(
+              FcmConfigErrorListener { errorCode, message ->
+                val payload =
+                        Arguments.createMap().apply {
+                          putInt("code", errorCode)
+                          putString("message", message)
+                        }
+                emitOnFcmConfigError(payload)
+              }
+      )
+    } else {
+      PushEngage.setFcmConfigErrorListener(null)
+    }
+  }
+
   override fun getName(): String {
     return NAME
   }
 
   override fun setAppId(appId: String?) {
+    PushEngage.Builder().addContext(reactApplicationContext).setAppId(appId).build()
+    // setWrapperVersion requires the SDK to be initialized via Builder.build()
+    // (returns silently otherwise), so we call it here rather than in init.
+    PushEngage.setWrapperVersion(WRAPPER_VERSION)
+  }
 
-    val pe = PushEngage.Builder().addContext(reactApplicationContext).setAppId(appId).build()
+  // The Android SDK doesn't expose a public setEnvironment yet, so we reach
+  // into PEPrefs the same way the native demo's PEApplication does. Must be
+  // called before setAppId — the RestClient reads the env on every request,
+  // but the base URLs are cached on first Builder.build().
+  override fun setEnvironment(environment: String?) {
+    val normalized = when (environment?.uppercase()) {
+      "STAGING", "STG" -> PEConstants.STG
+      else -> PEConstants.PROD
+    }
+    PEPrefs(reactApplicationContext).setEnvironment(normalized)
   }
 
   override fun getSdkVersion(): String {
-    return "0.0.3"
+    return WRAPPER_VERSION
   }
 
   override fun setSmallIconResource(resourceName: String?, promise: Promise?) {
@@ -63,10 +96,13 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
     PushEngage.enableLogging(shouldEnable)
   }
 
+  override fun setBadgeCount(count: Double) {
+    PushEngage.setBadgeCount(BadgeCountCoercion.fromDouble(count))
+  }
+
   override fun automatedNotification(status: Boolean, promise: Promise?) {
     PushEngage.automatedNotification(
-            if (status) PushEngage.TriggerStatusType.enabled
-            else PushEngage.TriggerStatusType.disabled,
+            TriggerStatusMapper.map(status),
             object : PushEngageResponseCallback {
               override fun onSuccess(responseObject: Any) {
                 promise?.resolve(
@@ -81,6 +117,7 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
     )
   }
 
+  @Suppress("UNCHECKED_CAST")
   override fun sendTriggerEvent(trigger: ReadableMap?, promise: Promise?) {
     val triggerCampaign =
             TriggerCampaign(
@@ -141,6 +178,7 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
     )
   }
 
+  @Suppress("UNCHECKED_CAST")
   override fun addAlert(alert: ReadableMap?, promise: Promise?) {
     val alert =
             TriggerAlert(
@@ -157,13 +195,7 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
                       0.0
                     },
                     variantId = alert?.getString("variantId")?.takeIf { it.isNotEmpty() },
-                    expiryTimestamp = alert?.getString("expiryTimestamp")?.let {
-                      try {
-                        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault()).parse(it)
-                      } catch (e: Exception) {
-                        null
-                      }
-                    },
+                    expiryTimestamp = Iso8601DateParser.parse(alert?.getString("expiryTimestamp")),
                     alertPrice = if (alert?.hasKey("alertPrice") == true && !alert.isNull("alertPrice")) {
                       try {
                         alert.getDouble("alertPrice")
@@ -173,13 +205,7 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
                     } else {
                       null
                     },
-                    availability = alert?.getString("availability")?.takeIf { it.isNotEmpty() }?.let {
-                      try {
-                        PushEngage.TriggerAlertAvailabilityType.valueOf(it)
-                      } catch (e: IllegalArgumentException) {
-                        null
-                      }
-                    },
+                    availability = TriggerAlertAvailabilityMapper.map(alert?.getString("availability")),
                     profileId = alert?.getString("profileId")?.takeIf { it.isNotEmpty() },
                     mrp = if (alert?.hasKey("mrp") == true && !alert.isNull("mrp")) {
                       try {
@@ -276,6 +302,12 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
 
   override fun getNotificationPermissionStatus(): String {
     return PushEngage.getNotificationPermissionStatus()
+  }
+
+  // No-op: Android delivers launch notifications via the host activity's
+  // deep-link intent, not through this bridge.
+  override fun getInitialNotification(promise: Promise?) {
+    promise?.resolve(null)
   }
 
   override fun getSubscriptionStatus(promise: Promise?) {
@@ -423,13 +455,19 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
   }
 
   override fun addDynamicSegment(segments: ReadableArray?, promise: Promise?) {
-    val segmentsList = segments?.toArrayList()?.map { it as Map<String, Any> }
     val dynamicSegments: MutableList<AddDynamicSegmentRequest.Segment> = ArrayList()
-    segmentsList?.forEach { map ->
-      val segment = AddDynamicSegmentRequest().Segment()
-      segment.name = map["name"] as String
-      segment.duration = (map["duration"] as Number).toLong()
-      dynamicSegments.add(segment)
+    try {
+      @Suppress("UNCHECKED_CAST")
+      val segmentsList = segments?.toArrayList()?.map { it as Map<String, Any> }
+      segmentsList?.forEach { map ->
+        val segment = AddDynamicSegmentRequest().Segment()
+        segment.name = map["name"] as String
+        segment.duration = (map["duration"] as Number).toLong()
+        dynamicSegments.add(segment)
+      }
+    } catch (e: Exception) {
+      promise?.reject("INVALID_ARGUMENT", "Missing required arguments")
+      return
     }
     PushEngage.addDynamicSegment(
             dynamicSegments,
@@ -445,6 +483,7 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
     )
   }
 
+  @Suppress("UNCHECKED_CAST")
   override fun addSubscriberAttributes(attributes: ReadableMap?, promise: Promise?) {
     try {
       val jsonObject = JSONObject(attributes?.toHashMap() as Map<String, String>)
@@ -496,6 +535,7 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
     )
   }
 
+  @Suppress("UNCHECKED_CAST")
   override fun setSubscriberAttributes(attributes: ReadableMap?, promise: Promise?) {
     try {
       val jsonObject = JSONObject(attributes?.toHashMap() as Map<String, String>)
@@ -513,6 +553,106 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
       )
     } catch (e: Exception) {
       promise?.reject("400", "Invalid input")
+    }
+  }
+
+  override fun identify(fields: ReadableMap?, promise: Promise?) {
+    if (fields == null) {
+      promise?.reject("400", "fields cannot be null")
+      return
+    }
+    try {
+      val jsonObject = JSONObject(fields.toHashMap())
+      PushEngage.identify(
+              jsonObject,
+              object : PushEngageResponseCallback {
+                override fun onSuccess(responseObject: Any?) {
+                  promise?.resolve(null)
+                }
+
+                override fun onFailure(errorCode: Int?, errorMessage: String?) {
+                  promise?.reject(
+                          errorCode?.toString() ?: "IDENTIFY_ERROR",
+                          errorMessage ?: "Identify failed"
+                  )
+                }
+              }
+      )
+    } catch (e: Exception) {
+      promise?.reject("400", "Invalid identify payload: ${e.message}")
+    }
+  }
+
+  override fun logout(fieldNames: ReadableArray?, promise: Promise?) {
+    val names = fieldNames?.toArrayList()?.map { it.toString() }
+    PushEngage.logout(
+            names,
+            object : PushEngageResponseCallback {
+              override fun onSuccess(responseObject: Any?) {
+                promise?.resolve(null)
+              }
+
+              override fun onFailure(errorCode: Int?, errorMessage: String?) {
+                promise?.reject(
+                        errorCode?.toString() ?: "LOGOUT_ERROR",
+                        errorMessage ?: "Logout failed"
+                )
+              }
+            }
+    )
+  }
+
+  override fun trackEvent(event: ReadableMap?, promise: Promise?) {
+    val eventName = event?.getString("eventName")?.takeIf { it.isNotEmpty() }
+    if (eventName == null) {
+      promise?.reject("400", "Missing required eventName")
+      return
+    }
+    // ReadableMap.toHashMap() yields HashMap<String, Any?> — TrackEvent's
+    // data field wants Map<String, Any>, so drop nulls before passing it on.
+    val data: Map<String, Any>? = event.getMap("data")
+            ?.toHashMap()
+            ?.entries
+            ?.mapNotNull { (k, v) -> v?.let { k to it } }
+            ?.toMap()
+    val profileId = event.getString("profileId")?.takeIf { it.isNotEmpty() }
+    val provider = event.getString("provider")?.takeIf { it.isNotEmpty() }
+    val eventType = event.getString("eventType")?.takeIf { it.isNotEmpty() }
+
+    val trackEvent = TrackEvent(
+            eventName = eventName,
+            data = data,
+            profileId = profileId,
+            provider = provider,
+            eventType = eventType
+    )
+    PushEngage.trackEvent(
+            trackEvent,
+            object : PushEngageResponseCallback {
+              override fun onSuccess(responseObject: Any?) {
+                promise?.resolve(null)
+              }
+
+              override fun onFailure(errorCode: Int?, errorMessage: String?) {
+                promise?.reject(
+                        errorCode?.toString() ?: "TRACK_EVENT_ERROR",
+                        errorMessage ?: "Track event failed"
+                )
+              }
+            }
+    )
+  }
+
+  // Native runConfigValidation returns `true` when a mismatch is detected.
+  // We invert that here so the JS-facing contract — "did config validation
+  // pass?" — matches the iOS no-op semantics of resolving `true`.
+  override fun runConfigValidation(senderId: String?, projectId: String?, promise: Promise?) {
+    try {
+      @Suppress("RestrictedApi")
+      val mismatch = PushEngage.runConfigValidation(senderId, projectId)
+      promise?.resolve(!mismatch)
+    } catch (e: Exception) {
+      promise?.reject("CONFIG_VALIDATION_ERROR", e.message ?: "Config validation threw", e)
     }
   }
 
@@ -548,15 +688,14 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
     }
   }
 
-  private fun getAlertType(type: String): PushEngage.TriggerAlertType {
-    return if (type == "priceDrop") {
-      PushEngage.TriggerAlertType.priceDrop
-    } else {
-      PushEngage.TriggerAlertType.inventory
-    }
-  }
+  private fun getAlertType(type: String): PushEngage.TriggerAlertType =
+    TriggerAlertTypeMapper.map(type)
 
   companion object {
     const val NAME = "PushengageReactNative"
+
+    // Bridge version reported to the backend via setWrapperVersion and
+    // returned from getSdkVersion. Kept in sync with package.json.
+    private const val WRAPPER_VERSION = "1.0.0"
   }
 }

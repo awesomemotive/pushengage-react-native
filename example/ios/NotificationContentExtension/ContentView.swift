@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import PushEngage
+import PushEngageExtension
 
 @available(iOSApplicationExtension 13.0, *)
 struct ContentView: View {

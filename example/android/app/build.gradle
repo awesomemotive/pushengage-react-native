@@ -78,21 +78,17 @@ def isNewArchitectureEnabled() {
 }
 
 if (isNewArchitectureEnabled()) {
-    // Only run codegen if generated sources are missing
-    def androidGeneratedDir = file("$rootDir/../../android/generated/java")
-    if (!androidGeneratedDir.exists()) {
-        tasks.register('invokeLibraryCodegen', Exec) {
-          workingDir "$rootDir/../../"
-          def isWindows = System.getProperty('os.name').toLowerCase().contains('windows')
+    tasks.register('invokeLibraryCodegen', Exec) {
+      workingDir "$rootDir/../../"
+      def isWindows = System.getProperty('os.name').toLowerCase().contains('windows')
 
-          if (isWindows) {
-            commandLine 'cmd', '/c', 'npx bob build --target codegen'
-          } else {
-            commandLine 'sh', '-c', 'npx bob build --target codegen'
-          }
-        }
-        preBuild.dependsOn invokeLibraryCodegen
+      if (isWindows) {
+        commandLine 'cmd', '/c', 'npx bob build --target codegen'
+      } else {
+        commandLine 'sh', '-c', 'npx bob build --target codegen'
+      }
     }
+    preBuild.dependsOn invokeLibraryCodegen
 }
 
 apply plugin: 'com.google.gms.google-services'

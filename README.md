@@ -32,6 +32,8 @@ campaigns, A/B testing, analytics, and a no-code campaign builder.
 - **TypeScript Support** -- fully typed with TypeScript definitions
 - **Rich Notifications** -- images, action buttons, custom sounds
 - **Deep Linking** -- route users to specific screens via `onValueChanged` callback
+- **Cold-Boot Taps** -- capture the notification an app was launched from via
+  `getInitialNotification`
 - **Audience Segmentation** -- static and dynamic segments based on user behavior
 - **Triggered Campaigns** -- send notifications based on in-app events
 - **Goal Tracking** -- measure conversions tied to notifications
@@ -82,13 +84,23 @@ if (granted) {
 }
 ```
 
-### 3. Handle Deep Links
+### 3. Handle Deep Links & Cold-Boot Taps
 
 ```tsx
+// Runtime taps (app in foreground or background)
 PushEngage.onValueChanged(data => {
   console.log('Notification data:', data)
   // Navigate to the appropriate screen based on data
 })
+
+// Cold-boot tap (app launched from a terminated state) — call once on startup.
+// On iOS this returns the launch notification and then drains (subsequent calls
+// return null). On Android it resolves null, since cold-boot launches are
+// delivered through the standard deep-link intent.
+const initial = await PushEngage.getInitialNotification()
+if (initial) {
+  // Navigate based on initial.deepLink / initial.data
+}
 ```
 
 ### 4. Send a Goal Event
@@ -107,15 +119,17 @@ await PushEngage.sendGoal({
 
 | Category            | Methods                                                                                                       |
 | ------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **Setup**           | `setAppId`, `getSdkVersion`, `setSmallIconResource`, `enableLogging`                                          |
+| **Setup**           | `setAppId`, `setEnvironment`, `getSdkVersion`, `setSmallIconResource`, `enableLogging`, `runConfigValidation` |
 | **Permissions**     | `requestNotificationPermission`, `getNotificationPermissionStatus`                                            |
 | **Subscription**    | `subscribe`, `unsubscribe`, `getSubscriptionStatus`, `getSubscriptionNotificationStatus`                      |
-| **Subscriber Data** | `getSubscriberId`, `getSubscriberDetails`, `getDeviceTokenHash`, `addProfileId`                               |
+| **Subscriber Data** | `getSubscriberId`, `getSubscriberDetails`, `getDeviceTokenHash`                                               |
+| **Identity**        | `identify`, `logout`, `addProfileId`                                                                          |
 | **Attributes**      | `addSubscriberAttributes`, `setSubscriberAttributes`, `getSubscriberAttributes`, `deleteSubscriberAttributes` |
 | **Segments**        | `addSegment`, `removeSegment`, `addDynamicSegment`                                                            |
-| **Events**          | `sendTriggerEvent`, `sendGoal`, `addAlert`                                                                    |
+| **Events**          | `sendTriggerEvent`, `sendGoal`, `trackEvent`, `addAlert`                                                      |
 | **Campaigns**       | `automatedNotification` (enable/disable)                                                                      |
-| **Listeners**       | `onValueChanged` (deep link / notification data)                                                              |
+| **Notifications**   | `setBadgeCount`, `getInitialNotification` (cold-boot)                                                         |
+| **Listeners**       | `onValueChanged` (deep link / notification data), `onFcmConfigError`, `setFcmConfigErrorListenerEnabled`      |
 
 Full API reference:
 [React Native SDK Public APIs](https://pushengage.com/api/mobile-sdk/react-native-sdk)
@@ -142,9 +156,11 @@ Full API reference:
 The **`example/`** directory contains a complete React Native app demonstrating:
 
 - Push notification setup and permission handling
+- Subscription and subscriber details
 - Trigger campaigns
 - Alert entries (price drop / inventory)
 - Goal tracking
+- Cold-boot notification capture and badge management
 
 To run the example:
 

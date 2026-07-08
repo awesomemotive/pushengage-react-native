@@ -1,6 +1,6 @@
 {
   "name": "@pushengage/pushengage-react-native",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "The PushEngage SDK simplifies the integration of push notifications into your React Native apps, supporting both Android and iOS platforms.",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
@@ -39,6 +39,9 @@
   "scripts": {
     "example": "yarn workspace pushengage-react-native-example",
     "test": "jest",
+    "test:ios": "cd example/ios && xcodebuild test -workspace PushengageReactNativeExample.xcworkspace -scheme pushengage-react-native-Unit-Tests -destination 'platform=iOS Simulator,name=iPhone 16'",
+    "test:android": "cd example/android && ./gradlew --no-daemon :pushengage_pushengage-react-native:test",
+    "test:all": "yarn test && yarn test:android && yarn test:ios",
     "typecheck": "tsc",
     "lint": "eslint \"src/**/*.{js,ts,tsx}\"",
     "lint:fix": "eslint \"src/**/*.{js,ts,tsx}\" --fix",
@@ -100,7 +103,7 @@
     "prettier": "^3.0.3",
     "react": "19.1.0",
     "react-native": "0.78.0",
-    "react-native-builder-bob": "^0.32.0",
+    "react-native-builder-bob": "^0.41.0",
     "release-it": "^17.10.0",
     "turbo": "^1.10.7",
     "typescript": "^5.2.2"
@@ -174,8 +177,7 @@
       [
         "typescript",
         {
-          "project": "tsconfig.build.json",
-          "esm": true
+          "project": "tsconfig.build.json"
         }
       ]
     ]

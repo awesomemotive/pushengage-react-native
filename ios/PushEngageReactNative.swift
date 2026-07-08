@@ -12,27 +12,38 @@ import React
 @objc(PushEngageReactNative)
 public class PushEngageReactNative: NSObject {
 
-    var callback: (([String: Any]) -> Void)?
+    // Cold-boot replay: see MessageBuffer.swift for the rationale.
+    let buffer = MessageBuffer()
 
     @objc public override init() {
         super.init()
-        PushEngage.setNotificationOpenHandler { (result) in
+        // Auto-report wrapper attribution so the backend tags this subscriber
+        // as an RN client without consumers having to do it manually.
+        PushEngage.setPlatform("react-native")
+        PushEngage.setWrapperVersion(PushEngageReactNative.wrapperVersion)
+        PushEngage.setNotificationOpenHandler { [weak self] (result) in
+            guard let self = self else { return }
             let additionalData: [String: String]? = result.notification.additionalData
             //Deeplink - trigger
             let deeplink = result.notificationAction.actionID
             let arguments: [String: Any] = [
                 "deepLink": deeplink as Any, "data": additionalData as Any,
             ]
-            self.callback?(arguments)
+            self.buffer.deliver(arguments)
         }
     }
 
+    // Bridge version — kept in sync with the npm package version via the
+    // package.json bump. Reported to the backend via setWrapperVersion and
+    // returned from getSdkVersion below.
+    @objc public static let wrapperVersion: String = "1.0.0"
+
     @objc public func setCallback(callback: @escaping ([String: Any]) -> Void) {
-        self.callback = callback
+        buffer.setCallback(callback)
     }
 
     @objc func triggerCallback(message: [String: Any]) {
-        callback?(message)
+        buffer.deliver(message)
     }
 
     @objc public func addAlert(
@@ -47,22 +58,11 @@ public class PushEngageReactNative: NSObject {
             reject("MISSING_ARGUMENTS", "Missing required arguments", nil)
             return
         }
-        var expiryTimestampDate: Date?
-        if let expiryTimestamp = alert["expiryTimestamp"] as? String {
-            expiryTimestampDate = ISO8601DateFormatter().date(from: expiryTimestamp)
-        }
-        var availability: TriggerAlertAvailabilityType?
-        if let availabilityString = alert["availability"] as? String {
-            if availabilityString == "inStock" {
-                availability = .inStock
-            } else if availabilityString == "outOfStock" {
-                availability = .outOfStock
-            }
-        }
+        let expiryTimestampDate = Iso8601DateParser.parse(alert["expiryTimestamp"] as? String)
+        let availability = TriggerAlertAvailabilityMapper.map(alert["availability"] as? String)
 
         let triggerAlert = TriggerAlert(
-            type: (typeString == "priceDrop")
-                ? TriggerAlertType.priceDrop : TriggerAlertType.inventory,
+            type: TriggerAlertTypeMapper.map(typeString),
             productId: productId,
             link: link,
             price: price,
@@ -148,7 +148,7 @@ public class PushEngageReactNative: NSObject {
         _ status: Bool, resolve: @escaping RCTPromiseResolveBlock,
         reject: @escaping RCTPromiseRejectBlock
     ) {
-        PushEngage.automatedNotification(status: status ? .enabled : .disabled) { response, error in
+        PushEngage.automatedNotification(status: AutomatedNotificationStatusMapper.map(status)) { response, error in
             if response {
                 resolve(
                     "Automated notification " + (status ? "enabled" : "disabled") + " successfully")
@@ -179,14 +179,21 @@ public class PushEngageReactNative: NSObject {
         PushEngage.enableLogging = shouldEnable
     }
 
+    @objc public func setBadgeCount(_ count: Double) {
+        PushEngage.setBadgeCount(count: BadgeCountCoercion.fromDouble(count))
+    }
+
     @objc public func getDeviceTokenHash(
         resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock
     ) {
-        resolve("")
+        // No public iOS SDK accessor for this yet; resolve nil so JS gets a
+        // value consistent with the Promise<string | null> spec and matches
+        // Android's behavior when the SDK has no hash to return.
+        resolve(nil)
     }
 
     @objc public func getSdkVersion() -> String {
-        return "0.0.3"
+        return PushEngageReactNative.wrapperVersion
     }
 
     @objc public func getSubscriberAttributes(
@@ -212,20 +219,10 @@ public class PushEngageReactNative: NSObject {
 
         PushEngage.getSubscriberDetails(for: values) { response, error in
             if let value = response {
-                let encoder = JSONEncoder()
-                encoder.keyEncodingStrategy = .convertToSnakeCase
-                do {
-                    let jsonData = try encoder.encode(value)
-                    if let jsonObject = try JSONSerialization.jsonObject(
-                        with: jsonData, options: []) as? [String: Any]
-                    {
-                        resolve(jsonObject)
-                    } else {
-                        reject("FAILURE", "Failed converting JSON to dictionary", nil)
-                    }
-                } catch {
-                    reject("FAILURE", "Failed decoding subscriber details", nil)
-                }
+                // iOS SDK 0.1.0 changed SubscriberDetailsData to a dynamic
+                // [String: Any] keyed by snake_case wire names — already the
+                // shape we want to send to JS, no JSONEncoder pass needed.
+                resolve(value.rawFields)
             } else {
                 reject("FAILURE", "Failed retrieving subscriber details", nil)
             }
@@ -265,6 +262,12 @@ public class PushEngageReactNative: NSObject {
 
     @objc public func getNotificationPermissionStatus() -> String {
         return PushEngage.getNotificationPermissionStatus()
+    }
+
+    @objc public func getInitialNotification(
+        resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock
+    ) {
+        resolve(buffer.consumeInitialNotification())
     }
 
     @objc public func getSubscriptionStatus(
@@ -396,11 +399,25 @@ public class PushEngageReactNative: NSObject {
         PushEngage.setAppID(id: appId)
     }
 
+    @objc public func setEnvironment(_ environment: String) {
+        let env: PEEnvironment
+        switch environment.uppercased() {
+        case "STAGING", "STG":
+            env = .staging
+        default:
+            env = .production
+        }
+        PushEngage.setEnvironment(environment: env)
+    }
+
     @objc public func setSmallIconResource(
         _ resourceName: String, resolve: @escaping RCTPromiseResolveBlock,
         reject: @escaping RCTPromiseRejectBlock
     ) {
-        resolve("")
+        // Android-only API; iOS notifications don't use a separately
+        // settable small-icon drawable. Resolve nil to match the
+        // Promise<void> spec and Android's resolution value.
+        resolve(nil)
     }
 
     @objc public func setSubscriberAttributes(
@@ -415,5 +432,88 @@ public class PushEngageReactNative: NSObject {
                 reject("FAILURE", "Failed to set subscriber attribute(s)", nil)
             }
         }
+    }
+
+    @objc public func identify(
+        _ fields: [String: Any], resolve: @escaping RCTPromiseResolveBlock,
+        reject: @escaping RCTPromiseRejectBlock
+    ) {
+        PushEngage.identify(fields: fields) { success, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    reject("IDENTIFY_ERROR", error.localizedDescription, error)
+                } else if success {
+                    resolve(nil)
+                } else {
+                    reject("IDENTIFY_FAILED", "Identify failed", nil)
+                }
+            }
+        }
+    }
+
+    @objc public func logout(
+        _ fieldNames: [Any]?, resolve: @escaping RCTPromiseResolveBlock,
+        reject: @escaping RCTPromiseRejectBlock
+    ) {
+        let names = fieldNames as? [String]
+        PushEngage.logout(fieldNames: names) { success, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    reject("LOGOUT_ERROR", error.localizedDescription, error)
+                } else if success {
+                    resolve(nil)
+                } else {
+                    reject("LOGOUT_FAILED", "Logout failed", nil)
+                }
+            }
+        }
+    }
+
+    @objc public func trackEvent(
+        _ event: [String: Any], resolve: @escaping RCTPromiseResolveBlock,
+        reject: @escaping RCTPromiseRejectBlock
+    ) {
+        guard let eventName = event["eventName"] as? String, !eventName.isEmpty else {
+            reject("MISSING_ARGUMENTS", "Missing required eventName", nil)
+            return
+        }
+        let properties = event["data"] as? [String: Any]
+        let profileId = event["profileId"] as? String
+        let provider = event["provider"] as? String
+        let eventType = event["eventType"] as? String
+
+        PushEngage.trackEvent(
+            name: eventName,
+            properties: properties,
+            profileId: profileId,
+            provider: provider,
+            eventType: eventType
+        ) { success, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    reject("TRACK_EVENT_ERROR", error.localizedDescription, error)
+                } else if success {
+                    resolve(nil)
+                } else {
+                    reject("TRACK_EVENT_FAILED", "Track event failed", nil)
+                }
+            }
+        }
+    }
+
+    @objc public func runConfigValidation(
+        _ senderId: String, projectId: String,
+        resolve: @escaping RCTPromiseResolveBlock,
+        reject: @escaping RCTPromiseRejectBlock
+    ) {
+        // iOS does not have an FCM config validation surface; the only
+        // analogue (APNS entitlement checks) is enforced by the OS at
+        // notification-registration time. Resolve true so shared JS code can
+        // call this unconditionally without a Platform.OS guard.
+        resolve(true)
+    }
+
+    @objc public func setFcmConfigErrorListenerEnabled(_ enabled: Bool) {
+        // No-op on iOS — FCM is Android-only.
     }
 }
