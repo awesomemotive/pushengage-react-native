@@ -1,6 +1,6 @@
 {
   "name": "@pushengage/pushengage-react-native",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The PushEngage SDK simplifies the integration of push notifications into your React Native apps, supporting both Android and iOS platforms.",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
@@ -39,6 +39,7 @@
   "scripts": {
     "example": "yarn workspace pushengage-react-native-example",
     "test": "jest",
+    "test:codegen:latest": "node scripts/check-codegen-latest.js",
     "test:ios": "cd example/ios && xcodebuild test -workspace PushengageReactNativeExample.xcworkspace -scheme pushengage-react-native-Unit-Tests -destination 'platform=iOS Simulator,name=iPhone 16'",
     "test:android": "cd example/android && ./gradlew --no-daemon :pushengage_pushengage-react-native:test",
     "test:all": "yarn test && yarn test:android && yarn test:ios",
@@ -105,6 +106,15 @@
     "react-native": "0.78.0",
     "react-native-builder-bob": "^0.41.0",
     "release-it": "^17.10.0",
+    "rn-codegen-0.78": "npm:@react-native/codegen@0.78.3",
+    "rn-codegen-0.79": "npm:@react-native/codegen@0.79.6",
+    "rn-codegen-0.80": "npm:@react-native/codegen@0.80.2",
+    "rn-codegen-0.81": "npm:@react-native/codegen@0.81.4",
+    "rn-codegen-0.82": "npm:@react-native/codegen@0.82.1",
+    "rn-codegen-0.83": "npm:@react-native/codegen@0.83.4",
+    "rn-codegen-0.84": "npm:@react-native/codegen@0.84.1",
+    "rn-codegen-0.85": "npm:@react-native/codegen@0.85.3",
+    "rn-codegen-0.86": "npm:@react-native/codegen@0.86.2",
     "turbo": "^1.10.7",
     "typescript": "^5.2.2"
   },

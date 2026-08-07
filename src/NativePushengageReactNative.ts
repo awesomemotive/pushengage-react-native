@@ -1,5 +1,8 @@
 import { TurboModuleRegistry, type TurboModule } from 'react-native';
-import type { EventEmitter } from 'react-native/Libraries/Types/CodegenTypes';
+import type {
+  EventEmitter,
+  UnsafeObject,
+} from 'react-native/Libraries/Types/CodegenTypes';
 
 /**
  * Interface defining the native module specification for PushEngage React Native SDK.
@@ -387,14 +390,17 @@ export interface Spec extends TurboModule {
    *   `profileId` (string, optional) — subscriber profile id.
    *   `provider` (string, optional) — defaults to "PushEngage".
    *   `eventType` (string, optional) — defaults to "PushEngage.CustomEvent".
+   *
+   * Typed as `UnsafeObject` because codegen since RN 0.84 rejects unions
+   * containing an index-signature object literal (`TSTypeLiteral`), and the
+   * payload's mixed-value `data` map is not expressible as a codegen struct.
+   * `UnsafeObject` keeps the generated signature a plain NSDictionary /
+   * ReadableMap; the precise public type is `TrackEventPayload` in
+   * `index.tsx`. Any replacement must pass `codegenCompat.test.ts`.
+   *
    * @returns Promise that resolves when the event has been recorded.
    */
-  trackEvent: (event: {
-    [key: string]:
-      | string
-      | { [key: string]: string | number | boolean }
-      | undefined;
-  }) => Promise<void>;
+  trackEvent: (event: UnsafeObject) => Promise<void>;
 
   /**
    * **Android only.** No-op on iOS — resolves to `true` so cross-platform

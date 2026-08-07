@@ -13,7 +13,7 @@ final class ConstantReturnTests: XCTestCase {
         // Pinned to whatever the bridge currently advertises. Update this
         // assertion deliberately when the SDK version bumps; the explicit
         // test prevents a silent drift.
-        XCTAssertEqual(version, "1.0.0")
+        XCTAssertEqual(version, "1.0.1")
     }
 
     func test_triggerCallback_routesThroughBuffer() {

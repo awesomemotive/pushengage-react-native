@@ -8,7 +8,7 @@
     "start": "react-native start",
     "build:android": "react-native build-android --extra-params \"--no-daemon --console=plain -PreactNativeArchitectures=arm64-v8a\"",
     "build:ios": "react-native build-ios --scheme PushengageReactNativeExample --mode Debug --extra-params \"-sdk iphonesimulator CC=clang CPLUSPLUS=clang++ LD=clang LDPLUSPLUS=clang++ GCC_OPTIMIZATION_LEVEL=0 GCC_PRECOMPILE_PREFIX_HEADER=YES ASSETCATALOG_COMPILER_OPTIMIZATION=time DEBUG_INFORMATION_FORMAT=dwarf COMPILER_INDEX_STORE_ENABLE=NO\"",
-    "pod": "RCT_NEW_ARCH_ENABLED=0 npx pod-install",
+    "pod": "npx pod-install",
     "lint": "eslint \"src/**/*.{js,ts,tsx}\"",
     "lint:fix": "eslint \"src/**/*.{js,ts,tsx}\" --fix",
     "format": "prettier --write \"src/**/*.{js,ts,tsx,json}\"",
@@ -20,26 +20,27 @@
     "@pushengage/pushengage-react-native": "workspace:^",
     "@react-native-async-storage/async-storage": "^2.1.0",
     "@react-native-community/datetimepicker": "^8.4.4",
-    "@react-native-picker/picker": "^2.8.1",
+    "@react-native-picker/picker": "^2.11.4",
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/native-stack": "^6.11.0",
-    "react": "19.1.0",
-    "react-native": "0.80.0",
+    "react": "19.2.3",
+    "react-native": "0.86.2",
     "react-native-dropdown-picker": "^5.4.6",
-    "react-native-safe-area-context": "^5.6.1",
-    "react-native-screens": "^4.15.3"
+    "react-native-safe-area-context": "^5.7.0",
+    "react-native-screens": "^4.26.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.3",
     "@babel/runtime": "^7.25.0",
-    "@react-native-community/cli": "16.0.0",
-    "@react-native-community/cli-platform-android": "16.0.0",
-    "@react-native-community/cli-platform-ios": "16.0.0",
-    "@react-native/babel-preset": "0.80.0",
+    "@react-native-community/cli": "20.1.0",
+    "@react-native-community/cli-platform-android": "20.1.0",
+    "@react-native-community/cli-platform-ios": "20.1.0",
+    "@react-native/babel-preset": "0.86.2",
     "@react-native/eslint-config": "^0.73.1",
-    "@react-native/metro-config": "0.80.0",
-    "@react-native/typescript-config": "0.80.0",
+    "@react-native/jest-preset": "0.86.2",
+    "@react-native/metro-config": "0.86.2",
+    "@react-native/typescript-config": "0.86.2",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
     "eslint": "^8.51.0",
@@ -52,6 +53,6 @@
     "react-native-builder-bob": "^0.32.0"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">= 22.11.0"
   }
 }

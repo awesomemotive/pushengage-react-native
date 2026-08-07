@@ -696,6 +696,6 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
 
     // Bridge version reported to the backend via setWrapperVersion and
     // returned from getSdkVersion. Kept in sync with package.json.
-    private const val WRAPPER_VERSION = "1.0.0"
+    private const val WRAPPER_VERSION = "1.0.1"
   }
 }

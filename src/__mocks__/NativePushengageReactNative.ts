@@ -20,7 +20,7 @@ const mockModule = {
   // Sync returns
   setAppId: jest.fn(),
   setEnvironment: jest.fn(),
-  getSdkVersion: jest.fn(() => '1.0.0'),
+  getSdkVersion: jest.fn(() => '1.0.1'),
   enableLogging: jest.fn(),
   setBadgeCount: jest.fn(),
   setFcmConfigErrorListenerEnabled: jest.fn(),
