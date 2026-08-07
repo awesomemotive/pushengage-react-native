@@ -44,9 +44,14 @@ android.iml
 #
 example/ios/Pods
 
-# Example project 
+# Example project
 example/android/app/google-services.json
 example/.yarn
+
+# Per-developer Xcode env override (machine-specific NODE_BINARY path).
+# The portable default lives in the committed .xcode.env; this local file
+# must never be tracked or it pins everyone to one machine's node path.
+.xcode.env.local
 # Ruby
 example/vendor/
 

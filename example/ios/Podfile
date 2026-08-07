@@ -16,8 +16,13 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-# Disable prebuilt React Native dependencies to avoid xcframework linkage issues
-ENV['RCT_USE_RN_DEP'] = '0'
+# RN 0.86 prebuilt frameworks (RCT_USE_PREBUILT_RNCORE / RCT_USE_RN_DEP) are
+# left at their defaults (both enabled) — the standard configuration for new
+# 0.86 apps. Disabling only one of them creates a mismatched hybrid: the
+# prebuilt React.framework links against ReactNativeDependencies.framework,
+# so if that one is built from source instead, the app crashes at launch with
+# "dyld: Library not loaded: @rpath/ReactNativeDependencies.framework".
+# Disable BOTH (set each to '0') or NEITHER.
 
 # PushEngage iOS SDK 1.0.0 (published pods).
 # 1.0.0 splits the SDK into two pods: 'PushEngage' (app target, resolved

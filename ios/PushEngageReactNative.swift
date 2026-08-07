@@ -36,7 +36,7 @@ public class PushEngageReactNative: NSObject {
     // Bridge version — kept in sync with the npm package version via the
     // package.json bump. Reported to the backend via setWrapperVersion and
     // returned from getSdkVersion below.
-    @objc public static let wrapperVersion: String = "1.0.0"
+    @objc public static let wrapperVersion: String = "1.0.1"
 
     @objc public func setCallback(callback: @escaping ([String: Any]) -> Void) {
         buffer.setCallback(callback)
