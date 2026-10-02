@@ -65,6 +65,9 @@ enum ActionId {
   // Triggers
   TriggerCampaigns = 'triggerCampaigns',
 
+  // In-App Messaging
+  InAppMessaging = 'inAppMessaging',
+
   // Cold-boot verification
   GetInitialNotification = 'getInitialNotification',
 }
@@ -153,6 +156,10 @@ const SECTIONS: Section[] = [
     title: 'Triggers',
     actions: [{ id: ActionId.TriggerCampaigns, label: 'Trigger Campaigns' }],
   },
+  {
+    title: 'In-App Messaging',
+    actions: [{ id: ActionId.InAppMessaging, label: 'In-App Messaging' }],
+  },
 ];
 
 interface ModalConfig {
@@ -194,6 +201,7 @@ const PushEngageScreen = () => {
 
   const valueChangedRef = React.useRef<null | EventSubscription>(null);
   const fcmErrorRef = React.useRef<null | EventSubscription>(null);
+  const iamCustomActionRef = React.useRef<null | EventSubscription>(null);
 
   useEffect(() => {
     DemoPrefs.getAppId().then(setAppId);
@@ -208,6 +216,12 @@ const PushEngageScreen = () => {
     fcmErrorRef.current = PushEngage.onFcmConfigError(event => {
       setFcmError(event);
       SdkEventLog.error(`FCM Config Error (${event.code})`, event.message);
+    });
+    iamCustomActionRef.current = PushEngage.onIAMCustomAction(action => {
+      SdkEventLog.success(
+        'In-app custom action',
+        `${action.actionId}\n${JSON.stringify(action.parameters, null, 2)}`
+      );
     });
 
     PushEngage.getInitialNotification().then(initial => {
@@ -231,6 +245,8 @@ const PushEngageScreen = () => {
       valueChangedRef.current = null;
       fcmErrorRef.current?.remove();
       fcmErrorRef.current = null;
+      iamCustomActionRef.current?.remove();
+      iamCustomActionRef.current = null;
       unsubscribe();
     };
   }, []);
@@ -621,6 +637,10 @@ const PushEngageScreen = () => {
 
       case ActionId.TriggerCampaigns:
         (navigation as any).navigate('TriggerCampaigns');
+        return;
+
+      case ActionId.InAppMessaging:
+        (navigation as any).navigate('InAppMessaging');
         return;
     }
   };

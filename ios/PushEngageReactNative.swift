@@ -36,7 +36,7 @@ public class PushEngageReactNative: NSObject {
     // Bridge version — kept in sync with the npm package version via the
     // package.json bump. Reported to the backend via setWrapperVersion and
     // returned from getSdkVersion below.
-    @objc public static let wrapperVersion: String = "1.0.1"
+    @objc public static let wrapperVersion: String = "1.1.0"
 
     @objc public func setCallback(callback: @escaping ([String: Any]) -> Void) {
         buffer.setCallback(callback)
@@ -44,6 +44,60 @@ public class PushEngageReactNative: NSObject {
 
     @objc func triggerCallback(message: [String: Any]) {
         buffer.deliver(message)
+    }
+
+    // In-app message custom-action forwarding. No MessageBuffer-style replay
+    // is needed here: custom actions only fire on user taps inside a
+    // displayed message, which cannot happen before the .mm init wires this
+    // callback (same call stack as module creation).
+    private var iamCustomActionCallback: (([String: Any]) -> Void)?
+    private var iamCustomActionForwardingEnabled = false
+    private var iamCustomActionHandlerRegistered = false
+
+    @objc public func setIAMCustomActionCallback(
+        callback: @escaping ([String: Any]) -> Void
+    ) {
+        iamCustomActionCallback = callback
+    }
+
+    @objc public func setIAMCustomActionHandlerEnabled(_ enabled: Bool) {
+        iamCustomActionForwardingEnabled = enabled
+        // The SDK handler setter takes a non-optional closure, so it can't be
+        // unregistered — register once and gate forwarding on the flag.
+        guard enabled, !iamCustomActionHandlerRegistered else { return }
+        iamCustomActionHandlerRegistered = true
+        PushEngage.setIAMCustomActionHandler { [weak self] actionId, parameters in
+            guard let self = self, self.iamCustomActionForwardingEnabled else { return }
+            self.iamCustomActionCallback?([
+                "actionId": actionId,
+                "parameters": parameters,
+            ])
+        }
+    }
+
+    @objc public func triggerIAMEvent(
+        _ eventName: String, parameters: [String: Any]?,
+        resolve: @escaping RCTPromiseResolveBlock,
+        reject: @escaping RCTPromiseRejectBlock
+    ) {
+        // Mirrors the Android module's guard so the same JS call fails the same
+        // way on both platforms; the native SDKs reject this too.
+        if eventName.isEmpty {
+            reject("400", "Event name is required", nil)
+            return
+        }
+        PushEngage.triggerIAMEvent(eventName: eventName, parameters: parameters) {
+            response, error in
+            if let error = error {
+                reject("TRIGGER_IN_APP_EVENT_ERROR", error.localizedDescription, error)
+            } else if response {
+                resolve("In-app message event triggered successfully")
+            } else {
+                reject(
+                    "TRIGGER_IN_APP_EVENT_FAILED", "Failed to trigger in-app message event",
+                    nil)
+            }
+        }
     }
 
     @objc public func addAlert(

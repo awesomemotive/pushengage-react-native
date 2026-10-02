@@ -34,3 +34,28 @@ describe('onValueChanged facade', () => {
     expect(subscription).toBe(fakeSubscription);
   });
 });
+
+describe('onIAMCustomAction facade', () => {
+  beforeEach(() => {
+    (mockNative.onIAMCustomAction as unknown as jest.Mock).mockClear();
+  });
+
+  it('forwards the listener to the native EventEmitter', () => {
+    const listener = jest.fn();
+    PushEngage.onIAMCustomAction(listener);
+
+    expect(mockNative.onIAMCustomAction).toHaveBeenCalledTimes(1);
+    expect(mockNative.onIAMCustomAction).toHaveBeenCalledWith(listener);
+  });
+
+  it('returns the native subscription object unchanged', () => {
+    const fakeSubscription = { remove: jest.fn() };
+    (mockNative.onIAMCustomAction as unknown as jest.Mock).mockReturnValueOnce(
+      fakeSubscription
+    );
+
+    const subscription = PushEngage.onIAMCustomAction(() => {});
+
+    expect(subscription).toBe(fakeSubscription);
+  });
+});

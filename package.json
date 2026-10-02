@@ -1,7 +1,7 @@
 {
   "name": "@pushengage/pushengage-react-native",
-  "version": "1.0.1",
-  "description": "The PushEngage SDK simplifies the integration of push notifications into your React Native apps, supporting both Android and iOS platforms.",
+  "version": "1.1.0",
+  "description": "PushEngage SDK for React Native: push notifications (FCM and APNs) and In-App Messaging for Android and iOS apps.",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
   "module": "./lib/module/index.js",
@@ -61,6 +61,17 @@
     "release": "release-it"
   },
   "keywords": [
+    "push-notifications",
+    "push",
+    "notifications",
+    "fcm",
+    "apns",
+    "firebase",
+    "firebase-messaging",
+    "expo",
+    "pushengage",
+    "in-app-messaging",
+    "deep-linking",
     "react-native",
     "ios",
     "android"
