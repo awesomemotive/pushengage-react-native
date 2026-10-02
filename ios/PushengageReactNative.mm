@@ -16,6 +16,12 @@
                           NSDictionary<NSString *, NSString *> *_Nonnull data) {
       [self emitOnValueChanged:(data)];
     }];
+
+    [pushengageModule
+        setIAMCustomActionCallbackWithCallback:^(
+            NSDictionary<NSString *, id> *_Nonnull data) {
+          [self emitOnIAMCustomAction:(data)];
+        }];
   }
   return self;
 }
@@ -215,6 +221,20 @@ RCT_EXPORT_MODULE()
 
 - (void)setFcmConfigErrorListenerEnabled:(BOOL)enabled {
   [pushengageModule setFcmConfigErrorListenerEnabled:enabled];
+}
+
+- (void)setIAMCustomActionHandlerEnabled:(BOOL)enabled {
+  [pushengageModule setIAMCustomActionHandlerEnabled:enabled];
+}
+
+- (void)triggerIAMEvent:(NSString *)eventName
+             parameters:(NSDictionary *_Nullable)parameters
+                resolve:(RCTPromiseResolveBlock)resolve
+                 reject:(RCTPromiseRejectBlock)reject {
+  [pushengageModule triggerIAMEvent:eventName
+                         parameters:parameters
+                            resolve:resolve
+                             reject:reject];
 }
 
 @end

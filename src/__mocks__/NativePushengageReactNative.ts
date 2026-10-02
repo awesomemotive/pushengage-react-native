@@ -20,10 +20,11 @@ const mockModule = {
   // Sync returns
   setAppId: jest.fn(),
   setEnvironment: jest.fn(),
-  getSdkVersion: jest.fn(() => '1.0.1'),
+  getSdkVersion: jest.fn(() => '1.1.0'),
   enableLogging: jest.fn(),
   setBadgeCount: jest.fn(),
   setFcmConfigErrorListenerEnabled: jest.fn(),
+  setIAMCustomActionHandlerEnabled: jest.fn(),
   getNotificationPermissionStatus: jest.fn(() => 'granted'),
 
   // Promise returns — default to resolved with a sensible value so any test
@@ -55,11 +56,13 @@ const mockModule = {
   trackEvent: jest.fn(async () => undefined),
   runConfigValidation: jest.fn(async () => true),
   getInitialNotification: jest.fn(async () => null),
+  triggerIAMEvent: jest.fn(async () => 'ok'),
 
   // EventEmitter pass-throughs. The default returns a subscription whose
   // remove() is a jest.fn so tests can assert it was called.
   onValueChanged: jest.fn(() => ({ remove: jest.fn() })),
   onFcmConfigError: jest.fn(() => ({ remove: jest.fn() })),
+  onIAMCustomAction: jest.fn(() => ({ remove: jest.fn() })),
 };
 
 export default mockModule;

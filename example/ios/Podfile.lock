@@ -3,11 +3,11 @@ PODS:
   - hermes-engine (250829098.0.16):
     - hermes-engine/Pre-built (= 250829098.0.16)
   - hermes-engine/Pre-built (250829098.0.16)
-  - PushEngage (1.0.0):
-    - PushEngageExtension (= 1.0.0)
-  - pushengage-react-native (1.0.1):
+  - PushEngage (1.1.0):
+    - PushEngageExtension (= 1.1.0)
+  - pushengage-react-native (1.1.0):
     - hermes-engine
-    - PushEngage (= 1.0.0)
+    - PushEngage (= 1.1.0)
     - RCTRequired
     - RCTTypeSafety
     - React-Core
@@ -28,9 +28,9 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - pushengage-react-native/Tests (1.0.1):
+  - pushengage-react-native/Tests (1.1.0):
     - hermes-engine
-    - PushEngage (= 1.0.0)
+    - PushEngage (= 1.1.0)
     - RCTRequired
     - RCTTypeSafety
     - React-Core
@@ -51,7 +51,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - PushEngageExtension (1.0.0)
+  - PushEngageExtension (1.1.0)
   - RCTDeprecation (0.86.2)
   - RCTRequired (0.86.2)
   - RCTSwiftUI (0.86.2)
@@ -2059,9 +2059,10 @@ PODS:
 DEPENDENCIES:
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
+  - PushEngage (= 1.1.0)
   - pushengage-react-native (from `../..`)
   - pushengage-react-native/Tests (from `../..`)
-  - PushEngageExtension (= 1.0.0)
+  - PushEngageExtension (= 1.1.0)
   - RCTDeprecation (from `../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
   - RCTRequired (from `../node_modules/react-native/Libraries/Required`)
   - RCTSwiftUI (from `../node_modules/react-native/ReactApple/RCTSwiftUI`)
@@ -2314,10 +2315,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FBLazyVector: 3c3be9a019176b5699455f7f66c5444b78a411c6
-  hermes-engine: a7afcd300d00c99344bc1e63453f4cd001c8ec7a
-  PushEngage: 4f7d453a251ac56f0909259a4699fd8abc11493f
-  pushengage-react-native: f4c5ddbbc283f442c40a5d849fe69249a78e9b63
-  PushEngageExtension: 181aba77761f464a52ffa4e782c634469b3e7845
+  hermes-engine: fccf9fb05d4fea67ee403aa1804e2bba1427f204
+  PushEngage: ca0cca41209430362377a85f44d82c5f31065d86
+  pushengage-react-native: 98b3034193a9a601a7584237466c10a2ed1af2b8
+  PushEngageExtension: bc08c27d1afec9dcc6874ddb500ef96d2f38728a
   RCTDeprecation: bccb6545c26db881ecddfd83a3f9ea82aba1605f
   RCTRequired: b2f74764d596fc0051f00fee94b49bf41a6f7f5a
   RCTSwiftUI: c6d6a31b849b9dfa64c33b55dc91ac15dd55774c
@@ -2397,6 +2398,6 @@ SPEC CHECKSUMS:
   RNScreens: 7118cd7715c226856125b5bece3c4d9abec90356
   Yoga: 9891cfb1c680f64de9c41b09e7453dea33454d2b
 
-PODFILE CHECKSUM: a37816c824a976bac1f1c2686f34cb0baf6e31cd
+PODFILE CHECKSUM: cdc4bd8b616da8f6e6b7dc996df2b155cefaa553
 
 COCOAPODS: 1.16.2

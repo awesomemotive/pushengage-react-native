@@ -24,11 +24,11 @@ end
 # "dyld: Library not loaded: @rpath/ReactNativeDependencies.framework".
 # Disable BOTH (set each to '0') or NEITHER.
 
-# PushEngage iOS SDK 1.0.0 (published pods).
-# 1.0.0 splits the SDK into two pods: 'PushEngage' (app target, resolved
-# transitively via pushengage-react-native.podspec's `s.dependency
-# 'PushEngage', '1.0.0'`) and 'PushEngageExtension' (extension-safe core,
-# linked explicitly by the extension targets below).
+# PushEngage iOS SDK — published pods. The SDK is split into two pods:
+# 'PushEngage' (app target) and 'PushEngageExtension' (extension-safe core,
+# linked by the extension targets below). Keep in step with
+# pushengage-react-native.podspec's `s.dependency 'PushEngage'`.
+pushengage_ios_sdk_version = '1.1.0'
 
 target 'PushengageReactNativeExample' do
   config = use_native_modules!
@@ -39,9 +39,8 @@ target 'PushengageReactNativeExample' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  # PushEngage (app target) resolves transitively from
-  # pushengage-react-native.podspec's `s.dependency 'PushEngage', '1.0.0'`,
-  # so no explicit declaration is needed here.
+  pod 'PushEngage', pushengage_ios_sdk_version
+  pod 'PushEngageExtension', pushengage_ios_sdk_version
 
   # Opt into the bridge's unit-test target. Autolinking via use_native_modules!
   # doesn't pass :testspecs through; this explicit declaration adds it. After
@@ -91,6 +90,13 @@ target 'PushengageReactNativeExample' do
           # effectively a no-op there.
           if ['PushEngage', 'PushEngageExtension', 'pushengage-react-native', 'pushengage-react-native-Unit-Tests', 'AppHost-pushengage-react-native-Unit-Tests'].include?(target.name)
             config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '16.0'
+          end
+
+          # Xcode 27 rejects any target below iOS 15.0 outright. Resource-bundle
+          # targets (e.g. PushEngage-PushEngageResources, which inherits the
+          # podspec's 13.0) are not in the list above, so apply a floor to all.
+          if config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'].to_f < 15.0
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
           end
 
           # NOTE: the 0.1.0-era APPLICATION_EXTENSION_API_ONLY=NO diagnostic
@@ -165,9 +171,9 @@ end
 # Per the 1.0.0 migration, extension targets link only the extension-safe
 # 'PushEngageExtension' pod (not the full app-side 'PushEngage' pod).
 target 'NotificationServiceExtension' do
-  pod 'PushEngageExtension', '1.0.0'
+  pod 'PushEngageExtension', pushengage_ios_sdk_version
 end
 
 target 'NotificationContentExtension' do
-  pod 'PushEngageExtension', '1.0.0'
+  pod 'PushEngageExtension', pushengage_ios_sdk_version
 end

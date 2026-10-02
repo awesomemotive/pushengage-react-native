@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   # below owns them exclusively.
   s.exclude_files = "ios/PushEngageReactNativeTests/**/*"
 
-  s.dependency 'PushEngage', '1.0.0'
+  s.dependency 'PushEngage', '1.1.0'
 
   # Unit-test target. Tests live under ios/PushEngageReactNativeTests/ and
   # exercise the bridge's pure-logic surface (MessageBuffer, Mappers, argument

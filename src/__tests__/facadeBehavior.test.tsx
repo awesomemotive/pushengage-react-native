@@ -98,6 +98,31 @@ describe('trackEvent wrapper payload construction', () => {
   });
 });
 
+describe('triggerIAMEvent wrapper', () => {
+  beforeEach(() => {
+    (mockNative.triggerIAMEvent as jest.Mock).mockReset();
+    (mockNative.triggerIAMEvent as jest.Mock).mockResolvedValue('ok');
+  });
+
+  it('forwards the event name and parameters unchanged', async () => {
+    await PushEngage.triggerIAMEvent('onboarding', {
+      step: 'complete',
+      attempt: 2,
+      returning: true,
+    });
+    expect(mockNative.triggerIAMEvent).toHaveBeenCalledWith('onboarding', {
+      step: 'complete',
+      attempt: 2,
+      returning: true,
+    });
+  });
+
+  it('coerces omitted parameters to null for the nullable bridge arg', async () => {
+    await PushEngage.triggerIAMEvent('onboarding');
+    expect(mockNative.triggerIAMEvent).toHaveBeenCalledWith('onboarding', null);
+  });
+});
+
 describe('module-load auto-enable side effect', () => {
   it('calls setFcmConfigErrorListenerEnabled(true) exactly once on first import', () => {
     jest.isolateModules(() => {
@@ -111,6 +136,23 @@ describe('module-load auto-enable side effect', () => {
         1
       );
       expect(freshMock.setFcmConfigErrorListenerEnabled).toHaveBeenCalledWith(
+        true
+      );
+    });
+  });
+
+  it('calls setIAMCustomActionHandlerEnabled(true) exactly once on first import', () => {
+    jest.isolateModules(() => {
+      const freshMock = require('../NativePushengageReactNative')
+        .default as typeof mockNative;
+      (freshMock.setIAMCustomActionHandlerEnabled as jest.Mock).mockClear();
+
+      require('../index');
+
+      expect(freshMock.setIAMCustomActionHandlerEnabled).toHaveBeenCalledTimes(
+        1
+      );
+      expect(freshMock.setIAMCustomActionHandlerEnabled).toHaveBeenCalledWith(
         true
       );
     });

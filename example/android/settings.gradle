@@ -18,7 +18,3 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
 rootProject.name = 'pushengagereactnative.example'
 
 include ':app'
-
-// PushEngage Android SDK resolves from the published JitPack artifact
-// (com.github.awesomemotive:pushengage-android-sdk:0.1.0, declared in
-// android/build.gradle).

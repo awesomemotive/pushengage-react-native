@@ -35,8 +35,10 @@ const expectedMethods = [
   'logout',
   'trackEvent',
   'runConfigValidation',
+  'triggerIAMEvent',
   'onValueChanged',
   'onFcmConfigError',
+  'onIAMCustomAction',
 ];
 
 describe('PushEngage spec surface', () => {

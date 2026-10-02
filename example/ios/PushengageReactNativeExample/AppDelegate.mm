@@ -1,38 +1,14 @@
 #import "AppDelegate.h"
 
+#import <RCTDefaultReactNativeFactoryDelegate.h>
 #import <React/RCTBundleURLProvider.h>
 #import <ReactAppDependencyProvider/RCTAppDependencyProvider.h>
 @import PushEngage;
 
-@implementation AppDelegate
+@interface ReactNativeDelegate : RCTDefaultReactNativeFactoryDelegate
+@end
 
-- (instancetype)init {
-  self = [super init];
-  if (self) {
-    [PushEngage swizzleInjectionWithIsEnabled:YES];
-  }
-  return self;
-}
-
-- (BOOL)application:(UIApplication *)application
-    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  self.moduleName = @"PushengageReactNativeExample";
-  self.dependencyProvider = [RCTAppDependencyProvider new];
-  // You can add your custom initial props in the dictionary below.
-  // They will be passed down to the ViewController used by React Native.
-  self.initialProps = @{};
-  [PushEngage setInitialInfoFor:application with:launchOptions];
-  [PushEngage setBadgeCountWithCount:0];
-  return [super application:application
-      didFinishLaunchingWithOptions:launchOptions];
-}
-
-- (void)application:(UIApplication *)application
-    didReceiveRemoteNotification:(NSDictionary *)userInfo
-          fetchCompletionHandler:
-              (void (^)(UIBackgroundFetchResult))completionHandler {
-  completionHandler(UIBackgroundFetchResultNewData);
-}
+@implementation ReactNativeDelegate
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge {
   return [self bundleURL];
@@ -46,6 +22,46 @@
   return [[NSBundle mainBundle] URLForResource:@"main"
                                  withExtension:@"jsbundle"];
 #endif
+}
+
+@end
+
+@implementation AppDelegate
+
+- (instancetype)init {
+  self = [super init];
+  if (self) {
+    [PushEngage swizzleInjectionWithIsEnabled:YES];
+  }
+  return self;
+}
+
+- (BOOL)application:(UIApplication *)application
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  ReactNativeDelegate *delegate = [ReactNativeDelegate new];
+  delegate.dependencyProvider = [RCTAppDependencyProvider new];
+  self.reactNativeDelegate = delegate;
+  self.reactNativeFactory =
+      [[RCTReactNativeFactory alloc] initWithDelegate:delegate];
+
+  [PushEngage setInitialInfoFor:application with:launchOptions];
+  [PushEngage setBadgeCountWithCount:0];
+  return YES;
+}
+
+- (UISceneConfiguration *)application:(UIApplication *)application
+    configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession
+                                   options:(UISceneConnectionOptions *)options {
+  return [[UISceneConfiguration alloc]
+      initWithName:@"Default Configuration"
+       sessionRole:connectingSceneSession.role];
+}
+
+- (void)application:(UIApplication *)application
+    didReceiveRemoteNotification:(NSDictionary *)userInfo
+          fetchCompletionHandler:
+              (void (^)(UIBackgroundFetchResult))completionHandler {
+  completionHandler(UIBackgroundFetchResultNewData);
 }
 
 @end

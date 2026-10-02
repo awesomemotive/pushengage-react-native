@@ -21,6 +21,7 @@ import com.pushengage.pushengage.Callbacks.PushEngageResponseCallback
 import com.pushengage.pushengage.PushEngage
 import com.pushengage.pushengage.helper.PEConstants
 import com.pushengage.pushengage.helper.PEPrefs
+import com.pushengage.pushengage.iam.action.IAMCustomActionHandler
 import com.pushengage.pushengage.model.request.AddDynamicSegmentRequest
 import com.pushengage.pushengage.model.request.Goal
 import com.pushengage.pushengage.model.request.TrackEvent
@@ -54,6 +55,62 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
     } else {
       PushEngage.setFcmConfigErrorListener(null)
     }
+  }
+
+  override fun setIAMCustomActionHandlerEnabled(enabled: Boolean) {
+    if (enabled) {
+      PushEngage.setIAMCustomActionHandler(
+              object : IAMCustomActionHandler {
+                override fun onCustomAction(actionId: String, parameters: Map<String, Any>) {
+                  // The JS contract types parameters as {[key: string]: string};
+                  // stringify values so mixed native payloads stay in contract.
+                  val params = Arguments.createMap()
+                  parameters.forEach { (key, value) -> params.putString(key, value.toString()) }
+                  val payload =
+                          Arguments.createMap().apply {
+                            putString("actionId", actionId)
+                            putMap("parameters", params)
+                          }
+                  emitOnIAMCustomAction(payload)
+                }
+              }
+      )
+    } else {
+      PushEngage.setIAMCustomActionHandler(null)
+    }
+  }
+
+  override fun triggerIAMEvent(
+          eventName: String?,
+          parameters: ReadableMap?,
+          promise: Promise?
+  ) {
+    if (eventName.isNullOrEmpty()) {
+      promise?.reject("400", "Event name is required")
+      return
+    }
+    // ReadableMap.toHashMap() yields HashMap<String, Any?> — the SDK wants
+    // Map<String, Object>, so drop nulls before passing it on.
+    val params: Map<String, Any>? = parameters?.toHashMap()
+            ?.entries
+            ?.mapNotNull { (k, v) -> v?.let { k to it } }
+            ?.toMap()
+    PushEngage.triggerIAMEvent(
+            eventName,
+            params,
+            object : PushEngageResponseCallback {
+              override fun onSuccess(responseObject: Any?) {
+                promise?.resolve("In-app message event triggered successfully")
+              }
+
+              override fun onFailure(errorCode: Int?, errorMessage: String?) {
+                promise?.reject(
+                        errorCode?.toString() ?: "TRIGGER_IN_APP_EVENT_ERROR",
+                        errorMessage ?: "Failed to trigger in-app message event"
+                )
+              }
+            }
+    )
   }
 
   override fun getName(): String {
@@ -696,6 +753,6 @@ class PushengageReactNativeModule(reactContext: ReactApplicationContext) :
 
     // Bridge version reported to the backend via setWrapperVersion and
     // returned from getSdkVersion. Kept in sync with package.json.
-    private const val WRAPPER_VERSION = "1.0.1"
+    private const val WRAPPER_VERSION = "1.1.0"
   }
 }
